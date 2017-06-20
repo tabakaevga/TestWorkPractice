@@ -1,27 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Model.Tools;
 
-namespace Model
+namespace Model.Elements
 {
     class Capacitor
     {
+        #region private members
+
+        /// <summary>
+        /// Переменная сопротивления
+        /// </summary>
         private double _value;
+
+        /// <summary>
+        /// Переменная имени
+        /// </summary>
         private string _name;
 
-        public event EventHandler ValueChanged;
-        public ElementTypes Type => ElementTypes.Resistor;
+        #endregion
 
+        /// <summary>
+        /// События изменения сопротивления
+        /// </summary>
+        public event EventHandler ValueChanged;
+
+        /// <summary>
+        /// Тип элемента
+        /// </summary>
+        public ElementTypes Type => ElementTypes.Capacitor;
+
+        /// <summary>
+        /// Пустой конструктор объекта конденсатора
+        /// </summary>
         public Capacitor()
         {
             _value = 1;
             _name = "Capacitor #1.";
         }
 
+        /// <summary>
+        /// Конструктор объекта конденсатора
+        /// </summary>
+        /// <param name="value"> Значение сопротивления </param>
+        /// <param name="name"> Наименование элемента </param>
         public Capacitor(double value, string name)
         {
             Validator.ValidateDouble(_value);
@@ -30,6 +52,9 @@ namespace Model
             _name = name;
         }
 
+        /// <summary>
+        /// Наименование элемента
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -39,6 +64,10 @@ namespace Model
                 _name = value;
             }
         }
+        
+        /// <summary>
+        /// Сопротивление
+        /// </summary>
         public double Value
         {
             get { return _value; }
@@ -50,6 +79,10 @@ namespace Model
             }
         }
 
+        /// <summary>
+        /// Импеданс
+        /// </summary>
+        /// <param name="frequency"> Частота тока </param>
         public Complex CalculateZ(double frequency)
         {
             Validator.ValidateDouble(frequency);

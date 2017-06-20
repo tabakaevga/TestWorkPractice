@@ -10,16 +10,44 @@ namespace Model
 {
     class Resistor : IElement
     {
+        #region private members
+
+        /// <summary>
+        /// Переменная сопротивления
+        /// </summary>
         private double _value;
+
+        /// <summary>
+        /// Переменная имени
+        /// </summary>
         private string _name;
+
+        #endregion
+
+        /// <summary>
+        /// События изменения сопротивления
+        /// </summary>
         public event EventHandler ValueChanged;
 
+        /// <summary>
+        /// Тип элемента
+        /// </summary>
+        public ElementTypes Type => ElementTypes.Resistor;
+
+        /// <summary>
+        /// Пустой конструктор объекта катушки
+        /// </summary>
         public Resistor()
         {
             _value = 1;
             _name = "Resistor #1.";
         }
 
+        /// <summary>
+        /// Конструктор объекта катушки
+        /// </summary>
+        /// <param name="value"> Значение сопротивления </param>
+        /// <param name="name"> Наименование элемента </param>
         public Resistor(double value, string name)
         {
             Validator.ValidateDouble(_value);
@@ -28,8 +56,9 @@ namespace Model
             _name = name;
         }
 
-        public ElementTypes Type => ElementTypes.Resistor;
-
+        /// <summary>
+        /// Наименование элемента
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -39,6 +68,10 @@ namespace Model
                 _name = value;
             }
         }
+
+        /// <summary>
+        /// Сопротивление
+        /// </summary>
         public double Value
         {
             get { return _value; }
@@ -50,11 +83,13 @@ namespace Model
             }
         }
 
+        /// <summary>
+        /// Импеданс
+        /// </summary>
+        /// <param name="frequency"> Частота тока </param>
         public Complex CalculateZ(double frequency)
         {
             return new Complex(Value, 0);
         }
-
-        
     }
 }

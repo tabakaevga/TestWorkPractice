@@ -10,18 +10,44 @@ namespace Model
 {
     class Inductor : IElement
     {
+        #region private members
+
+        /// <summary>
+        /// Переменная сопротивления
+        /// </summary>
         private double _value;
+
+        /// <summary>
+        /// Переменная имени
+        /// </summary>
         private string _name;
 
-        public event EventHandler ValueChanged;
-        public ElementTypes Type => ElementTypes.Resistor;
+        #endregion
 
+        /// <summary>
+        /// События изменения сопротивления
+        /// </summary>
+        public event EventHandler ValueChanged;
+
+        /// <summary>
+        /// Тип элемента
+        /// </summary>
+        public ElementTypes Type => ElementTypes.Inductor;
+
+        /// <summary>
+        /// Пустой конструктор объекта катушки
+        /// </summary>
         public Inductor()
         {
             _value = 1;
             _name = "Inductor #1.";
         }
 
+        /// <summary>
+        /// Конструктор объекта катушки
+        /// </summary>
+        /// <param name="value"> Значение сопротивления </param>
+        /// <param name="name"> Наименование элемента </param>
         public Inductor(double value, string name)
         {
             Validator.ValidateDouble(_value);
@@ -30,6 +56,9 @@ namespace Model
             _name = name;
         }
 
+        /// <summary>
+        /// Наименование элемента
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -39,6 +68,10 @@ namespace Model
                 _name = value;
             }
         }
+
+        /// <summary>
+        /// Сопротивление
+        /// </summary>
         public double Value
         {
             get { return _value; }
@@ -50,6 +83,10 @@ namespace Model
             }
         }
 
+        /// <summary>
+        /// Импеданс
+        /// </summary>
+        /// <param name="frequency"> Частота тока </param>
         public Complex CalculateZ(double frequency)
         {
             Validator.ValidateDouble(frequency);
