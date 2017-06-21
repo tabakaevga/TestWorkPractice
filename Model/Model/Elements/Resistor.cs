@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Model.Tools;
 
 //См Inductor
-namespace Model
+namespace Model.Elements
 {
-    //TODO: XML Комментари
+    /// <summary>
+    /// Класс резистор
+    /// </summary>
     class Resistor : IElement
     {
         #region private members
@@ -39,11 +37,9 @@ namespace Model
         /// <summary>
         /// Пустой конструктор объекта катушки
         /// </summary>
-        public Resistor()
+        public Resistor():
+            this(1, "Resistor #1.")
         {
-            //NOTE: См. Inductor и Capacitor
-            _value = 1;
-            _name = "Resistor #1.";
         }
 
         /// <summary>
@@ -53,7 +49,7 @@ namespace Model
         /// <param name="name"> Наименование элемента </param>
         public Resistor(double value, string name)
         {
-            Validator.ValidateDouble(_value);
+            Validator.ValidateDouble(value);
             _value = value;
             Validator.ValidateString(name);
             _name = name;
@@ -64,7 +60,6 @@ namespace Model
         /// </summary>
         public string Name
         {
-            //TODO: Можно преобразовать в лямбду
             get { return _name; }
             set
             {
@@ -78,7 +73,6 @@ namespace Model
         /// </summary>
         public double Value
         {
-            //TODO: Можно преобразовать в лямбду
             get { return _value; }
             set
             {

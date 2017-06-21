@@ -4,8 +4,10 @@ using Model.Tools;
 
 namespace Model.Elements
 {
-    //TODO:XML Комментарии
-    class Capacitor
+    /// <summary>
+    /// Класс 
+    /// </summary>
+    class Capacitor : IElement
     {
         #region private members
 
@@ -26,7 +28,6 @@ namespace Model.Elements
         /// </summary>
         public event EventHandler ValueChanged;
 
-        //NOTE: Используй лучше GetType, функцию нужно перегрузить. Тогда избавишься от перечисления 
         /// <summary>
         /// Тип элемента
         /// </summary>
@@ -35,11 +36,9 @@ namespace Model.Elements
         /// <summary>
         /// Пустой конструктор объекта конденсатора
         /// </summary>
-        public Capacitor()
+        public Capacitor():
+            this(1,"Capacitor #1.")
         {
-            //TODO: Сделать присвоение через конструктор ниже, а не напрямую, т.к. в том конструкторе проверки есть
-            _value = 1;
-            _name = "Capacitor #1.";
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace Model.Elements
         /// <param name="name"> Наименование элемента </param>
         public Capacitor(double value, string name)
         {
-            Validator.ValidateDouble(_value);
+            Validator.ValidateDouble(value);
             _value = value;
             Validator.ValidateString(name);
             _name = name;

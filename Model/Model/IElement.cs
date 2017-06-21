@@ -8,23 +8,35 @@ using System.Numerics;
 
 namespace Model
 {
-    //TODO: XML Комментарии
+    /// <summary>
+    /// Интерфейс элементов цепи
+    /// </summary>
     interface IElement
     {
-        //TODO: XML Комментарии
+        /// <summary>
+        /// Событие изменения сопротивления
+        /// </summary>
+        event EventHandler ValueChanged;
+
+        /// <summary>
+        /// Тип элемента
+        /// </summary>
         ElementTypes Type { get; }
 
-        //TODO: XML Комментарии
+        /// <summary>
+        /// Наименование элемента
+        /// </summary>
         string Name { get; set; }
 
-        //TODO: XML Комментарии
+        /// <summary>
+        /// Значение сопротивления элемента
+        /// </summary>
         double Value { get; set; }
 
-        //TODO: XML Комментарии
+        /// <summary>
+        /// Подсчет комплексного сопротивления элемента
+        /// </summary>
+        /// <param name="value"> Входящее значение (например, частота тока) </param>
         Complex CalculateZ(double value);
-
-        //TODO: XML Комментарии
-        //TODO: У тебя в реализации событие находится выше чем рассчет Z. Мб тут тоже стоит поднять ? 
-        event EventHandler ValueChanged;
     }
 }

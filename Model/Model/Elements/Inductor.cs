@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using Model.Tools;
 
-//TODO: Изменить, добавив имя папки => Model.Elements
-namespace Model 
+
+namespace Model.Elements 
 {
-    //TODO: XML Комментарии 
+    /// <summary>
+    /// Класс Катушка
+    /// </summary>
     class Inductor : IElement
     {
         #region private members
@@ -37,14 +35,12 @@ namespace Model
         /// </summary>
         public ElementTypes Type => ElementTypes.Inductor;
 
-        //NOTE: См. Capacitor
         /// <summary>
         /// Пустой конструктор объекта катушки
         /// </summary>
-        public Inductor()
+        public Inductor() :
+            this(1, "Inductor #1.")
         {
-            _value = 1;
-            _name = "Inductor #1.";
         }
 
         /// <summary>
@@ -54,7 +50,7 @@ namespace Model
         /// <param name="name"> Наименование элемента </param>
         public Inductor(double value, string name)
         {
-            Validator.ValidateDouble(_value);
+            Validator.ValidateDouble(value);
             _value = value;
             Validator.ValidateString(name);
             _name = name;
