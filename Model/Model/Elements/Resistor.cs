@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Model.Tools;
 
+//См Inductor
 namespace Model
 {
+    //TODO: XML Комментари
     class Resistor : IElement
     {
         #region private members
@@ -39,6 +41,7 @@ namespace Model
         /// </summary>
         public Resistor()
         {
+            //NOTE: См. Inductor и Capacitor
             _value = 1;
             _name = "Resistor #1.";
         }
@@ -61,6 +64,7 @@ namespace Model
         /// </summary>
         public string Name
         {
+            //TODO: Можно преобразовать в лямбду
             get { return _name; }
             set
             {
@@ -74,6 +78,7 @@ namespace Model
         /// </summary>
         public double Value
         {
+            //TODO: Можно преобразовать в лямбду
             get { return _value; }
             set
             {

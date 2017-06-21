@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Model.Tools;
 
-namespace Model
+//TODO: Изменить, добавив имя папки => Model.Elements
+namespace Model 
 {
+    //TODO: XML Комментарии 
     class Inductor : IElement
     {
         #region private members
@@ -29,11 +31,13 @@ namespace Model
         /// </summary>
         public event EventHandler ValueChanged;
 
+        //NOTE: См. Capacitor
         /// <summary>
         /// Тип элемента
         /// </summary>
         public ElementTypes Type => ElementTypes.Inductor;
 
+        //NOTE: См. Capacitor
         /// <summary>
         /// Пустой конструктор объекта катушки
         /// </summary>
@@ -61,6 +65,7 @@ namespace Model
         /// </summary>
         public string Name
         {
+            //NOTE: В таких конструкциях можно лямбду исползовать
             get { return _name; }
             set
             {
