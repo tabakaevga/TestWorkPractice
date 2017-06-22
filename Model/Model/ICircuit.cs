@@ -8,6 +8,9 @@ namespace Model
 {
     interface ICircuit : IComponent
     {
+        /// <summary>
+        /// Событие изменения контура
+        /// </summary>
         event EventHandler CircuitChanged;
     }
 }

@@ -10,17 +10,33 @@ using Model;
 
 namespace Model.Circuits
 {
+    /// <summary>
+    /// Параллельное соединение
+    /// </summary>
     class ParallelCircuit : ICircuit
     {
+        /// <summary>
+        /// Список компонентов параллельного соединения
+        /// </summary>
         private List<IComponent> _circuits;
 
+        /// <summary>
+        /// Наименование параллельного соединения
+        /// </summary>
         private string _name;
 
+        /// <summary>
+        /// Конструктор параллельного соединения
+        /// </summary>
+        /// <param name="circuits"></param>
         public ParallelCircuit(List<IComponent> circuits )
         {
             _circuits = circuits;
         }
 
+        /// <summary>
+        /// Событие при изменении контура
+        /// </summary>
         public event EventHandler CircuitChanged;
 
         /// <summary>
@@ -36,7 +52,11 @@ namespace Model.Circuits
             }
         }
 
-
+        /// <summary>
+        /// Импеданс
+        /// </summary>
+        /// <param name="frequency"> Частота </param>
+        /// <returns></returns>
         public Complex CalculateZ(double frequency)
         {
             Complex mult = new Complex();
@@ -53,6 +73,10 @@ namespace Model.Circuits
             return mult / sum;
         }
 
+        /// <summary>
+        /// Добавление компонента
+        /// </summary>
+        /// <param name="component"></param>
         public void Add(IComponent component)
         {
             if (component == null)
@@ -66,6 +90,10 @@ namespace Model.Circuits
             _circuits.Add(component);
         }
 
+        /// <summary>
+        /// Удаление компонента
+        /// </summary>
+        /// <param name="component"></param>
         public void Remove(IComponent component)
         {
             if (!_circuits.Any())
