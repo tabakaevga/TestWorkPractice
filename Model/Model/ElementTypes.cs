@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 
+
+//TODO: Думаю лучше перенести в элементс, вместе с интерфейсом
 namespace Model
 {
     /// <summary>

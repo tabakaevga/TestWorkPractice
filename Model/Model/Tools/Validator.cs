@@ -11,6 +11,7 @@ namespace Model.Tools
         /// Метод, проверяющий корректность ввода вещественных чисел для сторон фигуры/радиуса окружности
         /// </summary>
         /// <param name="inputValue"> Входящая величина (сторона, радиус) </param>
+        //TODO: Если кидаешь исключения, тогда в param пиши требуемое значение, т.е. радиус должен быть больше нуля итд
         public static void ValidateDouble(double inputValue)
         {
             if (double.IsNaN(inputValue) || double.IsInfinity(inputValue))
@@ -19,7 +20,7 @@ namespace Model.Tools
             }
             if (inputValue <= 0)
             {
-                throw new ArgumentOutOfRangeException($"Input is <0");
+                throw new ArgumentOutOfRangeException($"Input is <=0");
             }
         }
 

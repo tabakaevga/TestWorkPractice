@@ -8,6 +8,7 @@ namespace Model.Elements
     /// <summary>
     /// Класс резистор
     /// </summary>
+    //TODO: Добавь модификатор доступа public к классам, которые будешь дергать из вне
     class Resistor : IElement
     {
         #region private members
@@ -28,6 +29,10 @@ namespace Model.Elements
         /// События изменения сопротивления
         /// </summary>
         public event EventHandler ValueChanged;
+
+        //TODO: Выбери для себя определенную последовательность методов, полей и свойств.
+        /*  У тебя идет событие, потом идет свойство, потом 2 конструктора потом еще свойства...*/
+        //TODO: Сделай регионы для свойств, конструкторов и методов, это относится к всем классам в Elements
 
         /// <summary>
         /// Тип элемента
@@ -78,6 +83,7 @@ namespace Model.Elements
             {
                 Validator.ValidateDouble(value);
                 _value = value;
+                //TODO: Добавить условие, если value != _value тогда только вызывай событие
                 ValueChanged?.Invoke(this, new EventArgs());
             }
         }
@@ -88,6 +94,7 @@ namespace Model.Elements
         /// <param name="frequency"> Частота тока </param>
         public Complex CalculateZ(double frequency)
         {
+            //TODO: Добавь валидацию
             return new Complex(Value, 0);
         }
     }

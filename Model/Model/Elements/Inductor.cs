@@ -29,6 +29,8 @@ namespace Model.Elements
         /// </summary>
         public event EventHandler ValueChanged;
 
+        //TODO: Добавь регионы (описано в Resistor)
+
         //NOTE: См. Capacitor
         /// <summary>
         /// Тип элемента
@@ -80,6 +82,7 @@ namespace Model.Elements
             {
                 Validator.ValidateDouble(value);
                 _value = value;
+                //TODO: Проверка описана в Resistor
                 ValueChanged?.Invoke(this, new EventArgs());
             }
         }

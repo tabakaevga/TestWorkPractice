@@ -4,6 +4,7 @@ using Model.Tools;
 
 namespace Model.Elements
 {
+    //TODO: Какой класс ? 
     /// <summary>
     /// Класс 
     /// </summary>
@@ -27,6 +28,8 @@ namespace Model.Elements
         /// События изменения сопротивления
         /// </summary>
         public event EventHandler ValueChanged;
+
+        //TODO: Добавь регионы, описано в Resistor
 
         /// <summary>
         /// Тип элемента
@@ -77,6 +80,7 @@ namespace Model.Elements
             {
                 Validator.ValidateDouble(value);
                 _value = value;
+                //TODO: Проверка описана в Resistor
                 ValueChanged?.Invoke(this, new EventArgs());
             }
         }

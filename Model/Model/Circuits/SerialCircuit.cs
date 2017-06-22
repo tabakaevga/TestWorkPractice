@@ -8,5 +8,10 @@ namespace Model.Circuits
 {
     class SerialCircuit
     {
+        //NOTE: Если не реализовал, хотя бы заглушку делай.
+        public SerialCircuit()
+        {
+            throw new NotImplementedException("Класс не реализован.");
+        }
     }
 }
