@@ -2,7 +2,9 @@
 
 namespace Model
 {
-    //TODO: XML Комментарии
+    /// <summary>
+    /// Интерфейс любых компонентов цепи
+    /// </summary>
     interface IComponent
     {
         /// <summary>

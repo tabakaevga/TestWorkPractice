@@ -8,8 +8,7 @@ namespace Model.Elements
     /// <summary>
     /// Класс резистор
     /// </summary>
-    //TODO: Добавь модификатор доступа public к классам, которые будешь дергать из вне
-    class Resistor : IElement
+    public class Resistor : IElement
     {
         #region private members
 
@@ -25,19 +24,16 @@ namespace Model.Elements
 
         #endregion
 
+        #region Events
+
         /// <summary>
         /// События изменения сопротивления
         /// </summary>
         public event EventHandler ValueChanged;
 
-        //TODO: Выбери для себя определенную последовательность методов, полей и свойств.
-        /*  У тебя идет событие, потом идет свойство, потом 2 конструктора потом еще свойства...*/
-        //TODO: Сделай регионы для свойств, конструкторов и методов, это относится к всем классам в Elements
+        #endregion
 
-        /// <summary>
-        /// Тип элемента
-        /// </summary>
-        public ElementTypes Type => ElementTypes.Resistor;
+        #region Constructs
 
         /// <summary>
         /// Пустой конструктор объекта катушки
@@ -59,6 +55,15 @@ namespace Model.Elements
             Validator.ValidateString(name);
             _name = name;
         }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Тип элемента
+        /// </summary>
+        public ElementTypes Type => ElementTypes.Resistor;
 
         /// <summary>
         /// Наименование элемента
@@ -83,10 +88,16 @@ namespace Model.Elements
             {
                 Validator.ValidateDouble(value);
                 _value = value;
-                //TODO: Добавить условие, если value != _value тогда только вызывай событие
-                ValueChanged?.Invoke(this, new EventArgs());
+                if (Math.Abs(value - _value) > 0.0000000000000000000000000000000001)
+                {
+                    ValueChanged?.Invoke(this, new EventArgs());
+                }
             }
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Импеданс
@@ -94,8 +105,11 @@ namespace Model.Elements
         /// <param name="frequency"> Частота тока </param>
         public Complex CalculateZ(double frequency)
         {
-            //TODO: Добавь валидацию
             return new Complex(Value, 0);
         }
+
+        #endregion
+
+
     }
 }

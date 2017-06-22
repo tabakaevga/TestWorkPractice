@@ -8,10 +8,9 @@ namespace Model.Tools
     public static class Validator
     {
         /// <summary>
-        /// Метод, проверяющий корректность ввода вещественных чисел для сторон фигуры/радиуса окружности
+        /// Метод, проверяющий корректность ввода вещественных чисел.
         /// </summary>
-        /// <param name="inputValue"> Входящая величина (сторона, радиус) </param>
-        //TODO: Если кидаешь исключения, тогда в param пиши требуемое значение, т.е. радиус должен быть больше нуля итд
+        /// <param name="inputValue"> Входящая величина, должна быть больше 0. </param>
         public static void ValidateDouble(double inputValue)
         {
             if (double.IsNaN(inputValue) || double.IsInfinity(inputValue))

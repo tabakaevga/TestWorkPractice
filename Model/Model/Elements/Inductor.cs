@@ -8,7 +8,7 @@ namespace Model.Elements
     /// <summary>
     /// Класс Катушка
     /// </summary>
-    class Inductor : IElement
+    public class Inductor : IElement
     {
         #region private members
 
@@ -24,18 +24,16 @@ namespace Model.Elements
 
         #endregion
 
+        #region Events
+
         /// <summary>
         /// События изменения сопротивления
         /// </summary>
         public event EventHandler ValueChanged;
 
-        //TODO: Добавь регионы (описано в Resistor)
+        #endregion
 
-        //NOTE: См. Capacitor
-        /// <summary>
-        /// Тип элемента
-        /// </summary>
-        public ElementTypes Type => ElementTypes.Inductor;
+        #region Constructs
 
         /// <summary>
         /// Пустой конструктор объекта катушки
@@ -58,12 +56,20 @@ namespace Model.Elements
             _name = name;
         }
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Тип элемента
+        /// </summary>
+        public ElementTypes Type => ElementTypes.Inductor;
+
         /// <summary>
         /// Наименование элемента
         /// </summary>
         public string Name
         {
-            //NOTE: В таких конструкциях можно лямбду исползовать
             get { return _name; }
             set
             {
@@ -82,10 +88,16 @@ namespace Model.Elements
             {
                 Validator.ValidateDouble(value);
                 _value = value;
-                //TODO: Проверка описана в Resistor
-                ValueChanged?.Invoke(this, new EventArgs());
+                if (Math.Abs(value - _value) > 0.0000000000000000000000000000000001)
+                {
+                    ValueChanged?.Invoke(this, new EventArgs());
+                }
             }
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Импеданс
@@ -96,5 +108,8 @@ namespace Model.Elements
             Validator.ValidateDouble(frequency);
             return new Complex(0, 2 * Math.PI * frequency * _value);
         }
+
+        #endregion
+
     }
 }

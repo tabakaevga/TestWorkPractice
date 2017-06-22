@@ -4,11 +4,11 @@ using Model.Tools;
 
 namespace Model.Elements
 {
-    //TODO: Какой класс ? 
+    
     /// <summary>
-    /// Класс 
+    /// Класс конденсатор
     /// </summary>
-    class Capacitor : IElement
+    public class Capacitor : IElement
     {
         #region private members
 
@@ -24,23 +24,22 @@ namespace Model.Elements
 
         #endregion
 
+        #region Events
+
         /// <summary>
         /// События изменения сопротивления
         /// </summary>
         public event EventHandler ValueChanged;
 
-        //TODO: Добавь регионы, описано в Resistor
+        #endregion
 
-        /// <summary>
-        /// Тип элемента
-        /// </summary>
-        public ElementTypes Type => ElementTypes.Capacitor;
+        #region Constructs
 
         /// <summary>
         /// Пустой конструктор объекта конденсатора
         /// </summary>
-        public Capacitor():
-            this(1,"Capacitor #1.")
+        public Capacitor() :
+            this(1, "Capacitor #1.")
         {
         }
 
@@ -57,6 +56,15 @@ namespace Model.Elements
             _name = name;
         }
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Тип элемента
+        /// </summary>
+        public ElementTypes Type => ElementTypes.Capacitor;
+
         /// <summary>
         /// Наименование элемента
         /// </summary>
@@ -69,7 +77,7 @@ namespace Model.Elements
                 _name = value;
             }
         }
-        
+
         /// <summary>
         /// Сопротивление
         /// </summary>
@@ -80,10 +88,16 @@ namespace Model.Elements
             {
                 Validator.ValidateDouble(value);
                 _value = value;
-                //TODO: Проверка описана в Resistor
-                ValueChanged?.Invoke(this, new EventArgs());
+                if (Math.Abs(value - _value) > 0.00000000000000000000000000000000000000000000000000001)
+                {
+                    ValueChanged?.Invoke(this, new EventArgs());
+                }
             }
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Импеданс
@@ -92,7 +106,11 @@ namespace Model.Elements
         public Complex CalculateZ(double frequency)
         {
             Validator.ValidateDouble(frequency);
-            return new Complex(0, - 1/ (Math.PI * frequency * _value));
+            return new Complex(0, -1 / (Math.PI * frequency * _value));
         }
+
+        #endregion
+
+
     }
 }

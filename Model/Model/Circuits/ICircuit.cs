@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    //TODO: XML Комментарии
+    /// <summary>
+    /// Контур цепи/Соединение
+    /// </summary>
     interface ICircuit : IComponent
     {
         /// <summary>

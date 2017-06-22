@@ -15,7 +15,9 @@ namespace Model.Circuits
     /// </summary>
     class ParallelCircuit : ICircuit
     {
-        //TODO: Регионы (см. Resistor)
+
+        #region private members
+
         /// <summary>
         /// Список компонентов параллельного соединения
         /// </summary>
@@ -26,21 +28,35 @@ namespace Model.Circuits
         /// </summary>
         private string _name;
 
-        /// <summary>
-        /// Конструктор параллельного соединения
-        /// </summary>
-        /// <param name="circuits"></param>
-        //TODO: опиши параметр
-        public ParallelCircuit(List<IComponent> circuits )
-        {
-            //TODO: Нужна проверка на Null
-            _circuits = circuits;
-        }
+        #endregion
+
+        #region Events
 
         /// <summary>
         /// Событие при изменении контура
         /// </summary>
         public event EventHandler CircuitChanged;
+
+        #endregion
+
+        #region Constructs
+
+        /// <summary>
+        /// Конструктор параллельного соединения
+        /// </summary>
+        /// <param name="circuits"> писок элементов соединения </param>
+        public ParallelCircuit(List<IComponent> circuits)
+        {
+            if (circuits == null)
+            {
+                throw new ArgumentException("List can't be null");
+            }
+            _circuits = circuits;
+        }
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Наименование элемента
@@ -55,11 +71,14 @@ namespace Model.Circuits
             }
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// Импеданс
         /// </summary>
         /// <param name="frequency"> Частота </param>
-        /// <returns></returns>
         public Complex CalculateZ(double frequency)
         {
             //NOTE: лол, один в один моя реализация)
@@ -67,7 +86,7 @@ namespace Model.Circuits
             Complex sum = new Complex();
             if (!_circuits.Any())
             {
-                return new Complex(0,0);
+                return new Complex(0, 0);
             }
             foreach (IComponent component in _circuits)
             {
@@ -80,8 +99,7 @@ namespace Model.Circuits
         /// <summary>
         /// Добавление компонента
         /// </summary>
-        /// <param name="component"></param>
-        //TODO: Опиши аргумент
+        /// <param name="component"> Добавляемый компонент </param>
         public void Add(IComponent component)
         {
             if (component == null)
@@ -98,8 +116,7 @@ namespace Model.Circuits
         /// <summary>
         /// Удаление компонента
         /// </summary>
-        /// <param name="component"></param>
-        //TODO: Опиши аргумент
+        /// <param name="component"> Удаляемый компонент </param>
         public void Remove(IComponent component)
         {
             if (!_circuits.Any())
@@ -113,14 +130,16 @@ namespace Model.Circuits
             _circuits.Remove(component);
         }
 
-        //TODO: XML комментарии
+        /// <summary>
+        /// Метод события
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnCircuitChanged(object sender, EventArgs e)
         {
             CircuitChanged?.Invoke(sender, e);
         }
 
-        
-
-
+        #endregion
     }
 }
