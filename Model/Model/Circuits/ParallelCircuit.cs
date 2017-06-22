@@ -15,6 +15,7 @@ namespace Model.Circuits
     /// </summary>
     class ParallelCircuit : ICircuit
     {
+        //TODO: Регионы (см. Resistor)
         /// <summary>
         /// Список компонентов параллельного соединения
         /// </summary>
@@ -29,8 +30,10 @@ namespace Model.Circuits
         /// Конструктор параллельного соединения
         /// </summary>
         /// <param name="circuits"></param>
+        //TODO: опиши параметр
         public ParallelCircuit(List<IComponent> circuits )
         {
+            //TODO: Нужна проверка на Null
             _circuits = circuits;
         }
 
@@ -59,6 +62,7 @@ namespace Model.Circuits
         /// <returns></returns>
         public Complex CalculateZ(double frequency)
         {
+            //NOTE: лол, один в один моя реализация)
             Complex mult = new Complex();
             Complex sum = new Complex();
             if (!_circuits.Any())
@@ -77,6 +81,7 @@ namespace Model.Circuits
         /// Добавление компонента
         /// </summary>
         /// <param name="component"></param>
+        //TODO: Опиши аргумент
         public void Add(IComponent component)
         {
             if (component == null)
@@ -94,6 +99,7 @@ namespace Model.Circuits
         /// Удаление компонента
         /// </summary>
         /// <param name="component"></param>
+        //TODO: Опиши аргумент
         public void Remove(IComponent component)
         {
             if (!_circuits.Any())
@@ -107,6 +113,7 @@ namespace Model.Circuits
             _circuits.Remove(component);
         }
 
+        //TODO: XML комментарии
         private void OnCircuitChanged(object sender, EventArgs e)
         {
             CircuitChanged?.Invoke(sender, e);
