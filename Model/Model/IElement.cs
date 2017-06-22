@@ -11,10 +11,10 @@ namespace Model
     /// <summary>
     /// Интерфейс элементов цепи
     /// </summary>
-    interface IElement
+    interface IElement : IComponent
     {
         /// <summary>
-        /// Событие изменения сопротивления
+        /// Событие изменения цепи
         /// </summary>
         event EventHandler ValueChanged;
 
@@ -24,19 +24,8 @@ namespace Model
         ElementTypes Type { get; }
 
         /// <summary>
-        /// Наименование элемента
-        /// </summary>
-        string Name { get; set; }
-
-        /// <summary>
         /// Значение сопротивления элемента
         /// </summary>
         double Value { get; set; }
-
-        /// <summary>
-        /// Подсчет комплексного сопротивления элемента
-        /// </summary>
-        /// <param name="value"> Входящее значение (например, частота тока) </param>
-        Complex CalculateZ(double value);
     }
 }
