@@ -16,12 +16,12 @@ namespace Model.Circuits
     class ParallelCircuit : ICircuit
     {
 
-        #region private members
+        #region Private Fields
 
         /// <summary>
         /// Список компонентов параллельного соединения
         /// </summary>
-        private List<IComponent> _circuits;
+        private readonly List<IComponent> _circuits;
 
         /// <summary>
         /// Наименование параллельного соединения
@@ -75,13 +75,15 @@ namespace Model.Circuits
 
         #region Methods
 
+        #region Public Methods
+
         /// <summary>
         /// Импеданс
         /// </summary>
         /// <param name="frequency"> Частота </param>
         public Complex CalculateZ(double frequency)
         {
-            //NOTE: лол, один в один моя реализация)
+            Validator.ValidateDouble(frequency);
             Complex mult = new Complex();
             Complex sum = new Complex();
             if (!_circuits.Any())
@@ -104,13 +106,14 @@ namespace Model.Circuits
         {
             if (component == null)
             {
-                throw new ArgumentNullException("Can't add null components.");
+                throw new ArgumentException("Can't add null components.");
             }
             if (_circuits.FirstOrDefault(c => c.Name == component.Name) != null)
             {
                 throw new ArgumentException("Component with this name already exists.");
             }
             _circuits.Add(component);
+            OnCircuitChanged(this, new EventArgs());
         }
 
         /// <summary>
@@ -121,24 +124,48 @@ namespace Model.Circuits
         {
             if (!_circuits.Any())
             {
-                throw new ArgumentNullException("Can't remove from empty list.");
+                throw new ArgumentException("Can't remove from empty list.");
             }
             if (_circuits.FirstOrDefault(c => c.Name == component.Name) == null)
             {
                 throw new ArgumentException("Component with this name doesn't exist.");
             }
             _circuits.Remove(component);
+            OnCircuitChanged(this, new EventArgs());
         }
+
+        /// <summary>
+        /// Удаление компонента по индексу
+        /// </summary>
+        /// <param name="index"></param>
+        public void RemoveAt(int index)
+        {
+            if (!_circuits.Any())
+            {
+                throw new ArgumentException("Can't remove from empty list.");
+            }
+            index++;
+            Validator.ValidateDouble(index);
+            index--;
+            _circuits.RemoveAt(index);
+            OnCircuitChanged(this, new EventArgs());
+        }
+
+        #endregion
+
+        #region Protected Methods
 
         /// <summary>
         /// Метод события
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnCircuitChanged(object sender, EventArgs e)
+        protected virtual void OnCircuitChanged(object sender, EventArgs e)
         {
             CircuitChanged?.Invoke(sender, e);
         }
+
+        #endregion
 
         #endregion
     }

@@ -105,6 +105,7 @@ namespace Model.Elements
         /// <param name="frequency"> Частота тока </param>
         public Complex CalculateZ(double frequency)
         {
+            Validator.ValidateDouble(frequency);
             return new Complex(Value, 0);
         }
 
