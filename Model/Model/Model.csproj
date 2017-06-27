@@ -48,7 +48,7 @@
     <Compile Include="Circuits\ParallelCircuit.cs" />
     <Compile Include="Circuits\SerialCircuit.cs" />
     <Compile Include="Elements\Capacitor.cs" />
-    <Compile Include="Elements\ElementTypes.cs" />
+    <Compile Include="Elements\ElementType.cs" />
     <Compile Include="Circuits\ICircuit.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="Elements\IElement.cs" />

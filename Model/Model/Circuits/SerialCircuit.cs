@@ -8,7 +8,7 @@ using Model.Tools;
 
 namespace Model.Circuits
 {
-    class SerialCircuit
+    public class SerialCircuit
     {
 
         #region Private Fields
@@ -39,14 +39,9 @@ namespace Model.Circuits
         /// <summary>
         /// Конструктор параллельного соединения
         /// </summary>
-        /// <param name="circuits"> писок элементов соединения </param>
-        public SerialCircuit(List<IComponent> circuits)
+        public SerialCircuit()
         {
-            if (circuits == null)
-            {
-                throw new ArgumentException("List can't be null");
-            }
-            _circuits = circuits;
+            _circuits = new List<IComponent>();
         }
 
         #endregion
@@ -107,6 +102,7 @@ namespace Model.Circuits
             }
             _circuits.Add(component);
             OnCircuitChanged(this, new EventArgs());
+            SubscribeTo(component);
         }
 
         /// <summary>
@@ -125,6 +121,7 @@ namespace Model.Circuits
             }
             _circuits.Remove(component);
             OnCircuitChanged(this, new EventArgs());
+            UnsubscribeFrom(component);
         }
 
         #endregion
@@ -139,6 +136,66 @@ namespace Model.Circuits
         protected virtual void OnCircuitChanged(object sender, EventArgs e)
         {
             CircuitChanged?.Invoke(sender, e);
+        }
+
+        /// <summary>
+        /// Удаление компонента по индексу
+        /// </summary>
+        /// <param name="index"></param>
+        public void RemoveAt(int index)
+        {
+            if (!_circuits.Any())
+            {
+                throw new ArgumentException("Can't remove from empty list.");
+            }
+            index++;
+            Validator.ValidateDouble(index);
+            index--;
+            var component = _circuits[index];
+            _circuits.RemoveAt(index);
+            OnCircuitChanged(this, new EventArgs());
+            UnsubscribeFrom(component);
+        }
+
+        #endregion
+
+
+        #region Private Methods
+
+        /// <summary>
+        /// Отписаться от компонента
+        /// </summary>
+        /// <param name="component">Компонент цепи </param>
+        private void UnsubscribeFrom(IComponent component)
+        {
+            if (component is ICircuit)
+            {
+                var circuit = component as ICircuit;
+                circuit.CircuitChanged -= CircuitChanged;
+            }
+            if (component is IElement)
+            {
+                var element = component as IElement;
+                element.ValueChanged -= CircuitChanged;
+            }
+        }
+
+        /// <summary>
+        /// Подписаться на компонент
+        /// </summary>
+        /// <param name="component">Компонент цепи </param>
+        private void SubscribeTo(IComponent component)
+        {
+            if (component is ICircuit)
+            {
+                var circuit = component as ICircuit;
+                circuit.CircuitChanged += CircuitChanged;
+            }
+            if (component is IElement)
+            {
+                var element = component as IElement;
+                element.ValueChanged += CircuitChanged;
+            }
         }
 
         #endregion

@@ -1,11 +1,12 @@
 ﻿using System;
+using Model.Elements;
 
 namespace Model
 {
     /// <summary>
     /// Интерфейс элементов цепи
     /// </summary>
-    interface IElement : IComponent
+    public interface IElement : IComponent
     {
         /// <summary>
         /// Событие изменения цепи

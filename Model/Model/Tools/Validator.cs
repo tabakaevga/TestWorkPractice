@@ -29,7 +29,7 @@ namespace Model.Tools
         /// <param name="inputString"> Вводимая строка </param>
         public static void ValidateString(string inputString)
         {
-            if (inputString.Length == 0)
+            if (inputString == String.Empty)
             {
                 throw new ArgumentException("String can't be empty.");
             }

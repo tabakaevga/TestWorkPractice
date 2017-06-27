@@ -106,7 +106,7 @@ namespace Model.Elements
         public Complex CalculateZ(double frequency)
         {
             Validator.ValidateDouble(frequency);
-            return new Complex(0, -1 / (Math.PI * frequency * _value));
+            return new Complex(0, -1 / (2 * Math.PI * frequency * _value));
         }
 
         #endregion

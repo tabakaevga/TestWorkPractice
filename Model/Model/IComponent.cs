@@ -5,7 +5,7 @@ namespace Model
     /// <summary>
     /// Интерфейс любых компонентов цепи
     /// </summary>
-    interface IComponent
+    public interface IComponent
     {
         /// <summary>
         /// Наименование компонента
