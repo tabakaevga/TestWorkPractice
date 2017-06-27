@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace View
 {
-    public partial class SubcircuitEditor : BaseCircuitEditor
+    public partial class ParallelSubcircuitEditor : BaseCircuitEditor
     {
-        public SubcircuitEditor()
+        public ParallelSubcircuitEditor()
         {
             InitializeComponent();
         }

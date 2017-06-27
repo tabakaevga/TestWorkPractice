@@ -16,5 +16,10 @@ namespace View
         {
             InitializeComponent();
         }
+
+        private void AddElementButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

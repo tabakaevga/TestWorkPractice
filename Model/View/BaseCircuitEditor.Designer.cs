@@ -31,7 +31,6 @@
             this.ComponentsGroupBox = new System.Windows.Forms.GroupBox();
             this.ComponentsListBox = new System.Windows.Forms.ListBox();
             this.AddElementButton = new System.Windows.Forms.Button();
-            this.AddSubCircuitButton = new System.Windows.Forms.Button();
             this.RemoveComponentButton = new System.Windows.Forms.Button();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ComponentsGroupBox.SuspendLayout();
@@ -63,15 +62,7 @@
             this.AddElementButton.TabIndex = 2;
             this.AddElementButton.Text = "Add Element";
             this.AddElementButton.UseVisualStyleBackColor = true;
-            // 
-            // AddSubCircuitButton
-            // 
-            this.AddSubCircuitButton.Location = new System.Drawing.Point(12, 281);
-            this.AddSubCircuitButton.Name = "AddSubCircuitButton";
-            this.AddSubCircuitButton.Size = new System.Drawing.Size(75, 34);
-            this.AddSubCircuitButton.TabIndex = 3;
-            this.AddSubCircuitButton.Text = "Add Subcircuit";
-            this.AddSubCircuitButton.UseVisualStyleBackColor = true;
+            this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
             // 
             // RemoveComponentButton
             // 
@@ -98,7 +89,6 @@
             this.ClientSize = new System.Drawing.Size(251, 377);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.RemoveComponentButton);
-            this.Controls.Add(this.AddSubCircuitButton);
             this.Controls.Add(this.AddElementButton);
             this.Controls.Add(this.ComponentsGroupBox);
             this.Name = "BaseCircuitEditor";
@@ -113,7 +103,6 @@
         private System.Windows.Forms.GroupBox ComponentsGroupBox;
         private System.Windows.Forms.ListBox ComponentsListBox;
         private System.Windows.Forms.Button AddElementButton;
-        private System.Windows.Forms.Button AddSubCircuitButton;
         private System.Windows.Forms.Button RemoveComponentButton;
         private System.Windows.Forms.Button ButtonCancel;
     }

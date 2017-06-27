@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class SubcircuitEditor
+    partial class ParallelSubcircuitEditor
     {
         /// <summary>
         /// Required designer variable.

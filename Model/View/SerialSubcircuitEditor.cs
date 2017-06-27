@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace View
 {
-    public partial class SerialSubcircuitEditor : Form
+    public partial class SerialSubcircuitEditor : BaseCircuitEditor
     {
         public SerialSubcircuitEditor()
         {
