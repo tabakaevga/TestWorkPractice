@@ -50,7 +50,12 @@ namespace Model.Circuits
         }
 
         /// <summary>
-        /// Индексатор списка
+        ///     Количество элементов
+        /// </summary>
+        public int Count => _circuits.Count;
+
+        /// <summary>
+        ///     Индексатор списка
         /// </summary>
         /// <param name="index"> Индекс </param>
         /// <returns></returns>
@@ -60,10 +65,8 @@ namespace Model.Circuits
             set
             {
                 if (value == null)
-                {
                     throw new ArgumentException("Object is not a component");
-                }
-                IComponent component = value;
+                var component = value;
                 UnsubscribeFrom(_circuits[index]);
                 _circuits[index] = component;
                 SubscribeTo(_circuits[index]);
@@ -98,6 +101,24 @@ namespace Model.Circuits
         public IEnumerator<IComponent> GetEnumerator()
         {
             return _circuits.GetEnumerator();
+        }
+
+        /// <summary>
+        ///     Первый элемент
+        /// </summary>
+        /// <returns></returns>
+        public IComponent FirstOrDefault()
+        {
+            return _circuits.FirstOrDefault();
+        }
+
+        /// <summary>
+        ///     Последний элемент
+        /// </summary>
+        /// <returns></returns>
+        public IComponent LastOrDefault()
+        {
+            return _circuits.LastOrDefault();
         }
 
         /// <summary>
@@ -194,7 +215,7 @@ namespace Model.Circuits
         }
 
         /// <summary>
-        /// Поиск элементов
+        ///     Поиск элементов
         /// </summary>
         /// <param name="name"> Имя элемента </param>
         /// <returns></returns>

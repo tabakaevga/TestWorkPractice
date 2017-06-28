@@ -6,21 +6,44 @@ using Model.Elements;
 
 namespace View.CircuitForms
 {
+    /// <summary>
+    /// Форма параллельного соединения
+    /// </summary>
     public partial class ParallelCircuitEditor : Form
     {
         #region Private variables
 
         /// <summary>
-        /// Список параллельных элементов
+        ///     Список параллельных элементов
         /// </summary>
         private readonly ParallelCircuit _circuit;
+
+        #endregion
+
+        #region Public Properties
+
+        public IComponent CircuitSent { get; private set; }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        ///     Заполнение листбокса
+        /// </summary>
+        private void RebindList()
+        {
+            ComponentsListBox.Items.Clear();
+            foreach (var component in _circuit)
+                ComponentsListBox.Items.Add(component.Name);
+        }
 
         #endregion
 
         #region Constructs
 
         /// <summary>
-        /// Конструктор нового соединения
+        ///     Конструктор нового соединения
         /// </summary>
         public ParallelCircuitEditor()
         {
@@ -30,7 +53,7 @@ namespace View.CircuitForms
         }
 
         /// <summary>
-        /// Конструктор редактируемого соединения
+        ///     Конструктор редактируемого соединения
         /// </summary>
         /// <param name="circuit"> Редактируемогое соединение </param>
         public ParallelCircuitEditor(ParallelCircuit circuit)
@@ -44,30 +67,10 @@ namespace View.CircuitForms
 
         #endregion
 
-        #region Public Properties
-
-        public IComponent CircuitSent { get; private set; }
-
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// Заполнение листбокса
-        /// </summary>
-        private void RebindList()
-        {
-            ComponentsListBox.Items.Clear();
-            foreach (var component in _circuit)
-                ComponentsListBox.Items.Add(component.Name);
-        }
-
-        #endregion
-
         #region Handlers
 
         /// <summary>
-        /// Обработчик события изменения соединения
+        ///     Обработчик события изменения соединения
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -77,7 +80,7 @@ namespace View.CircuitForms
         }
 
         /// <summary>
-        /// Обработчик события нажатия на кнопку Добавить элемент
+        ///     Обработчик события нажатия на кнопку Добавить элемент
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -86,13 +89,11 @@ namespace View.CircuitForms
             var f = new ElementEditor();
             f.ShowDialog();
             if (f.ElementSent != null)
-            {
                 _circuit.Add(f.ElementSent);
-            }
         }
 
         /// <summary>
-        /// Обработчик события нажатия на кнопку Добавить соединение
+        ///     Обработчик события нажатия на кнопку Добавить соединение
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -101,13 +102,11 @@ namespace View.CircuitForms
             var f = new SerialCircuitEditor();
             f.ShowDialog();
             if (f.CircuitSent != null)
-            {
                 _circuit.Add(f.CircuitSent);
-            }
         }
 
         /// <summary>
-        /// Обработчик события нажатия на кнопку Удалить элемент
+        ///     Обработчик события нажатия на кнопку Удалить элемент
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -117,7 +116,7 @@ namespace View.CircuitForms
         }
 
         /// <summary>
-        /// Обработчик события нажатия на кнопку ОК
+        ///     Обработчик события нажатия на кнопку ОК
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -136,7 +135,7 @@ namespace View.CircuitForms
         }
 
         /// <summary>
-        /// Обработчик события нажатия на кнопку Отмена
+        ///     Обработчик события нажатия на кнопку Отмена
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -147,41 +146,35 @@ namespace View.CircuitForms
         }
 
         /// <summary>
-        /// Обработчик события двойного клика на Списке компонентов
+        ///     Обработчик события двойного клика на Списке компонентов
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ComponentsListBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            int index = ComponentsListBox.IndexFromPoint(e.Location);
+            var index = ComponentsListBox.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches)
             {
                 if (_circuit[index] is IElement)
                 {
-                    IElement element = _circuit[index] as IElement;
+                    var element = _circuit[index] as IElement;
                     var f = new ElementEditor(element);
                     f.ShowDialog();
                     if (f.ElementSent != null)
-                    {
                         _circuit[index] = f.ElementSent;
-                    }
                 }
                 if (_circuit[index] is SerialCircuit)
                 {
-                    SerialCircuit circuit = _circuit[index] as SerialCircuit;
+                    var circuit = _circuit[index] as SerialCircuit;
                     var f = new SerialCircuitEditor(circuit);
                     f.ShowDialog();
                     if (f.CircuitSent != null)
-                    {
                         _circuit[index] = f.CircuitSent;
-                    }
                 }
                 RebindList();
             }
         }
 
         #endregion
-
-
     }
 }

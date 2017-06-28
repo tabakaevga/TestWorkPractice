@@ -8,10 +8,10 @@ using Model.Tools;
 namespace Model.Circuits
 {
     /// <summary>
-    /// Класс последовательного соединения
+    ///     Класс последовательного соединения
     /// </summary>
     [Serializable]
-    public class SerialCircuit : IComponent
+    public class SerialCircuit : ICircuit
     {
         #region Constructs
 
@@ -22,6 +22,15 @@ namespace Model.Circuits
         {
             _circuits = new List<IComponent>();
         }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        ///     Событие при изменении контура
+        /// </summary>
+        public event EventHandler CircuitChanged;
 
         #endregion
 
@@ -41,7 +50,12 @@ namespace Model.Circuits
         }
 
         /// <summary>
-        /// Индексатор списка
+        ///     Количество элементов
+        /// </summary>
+        public int Count => _circuits.Count;
+
+        /// <summary>
+        ///     Индексатор списка
         /// </summary>
         /// <param name="index"> Индекс </param>
         /// <returns></returns>
@@ -51,25 +65,14 @@ namespace Model.Circuits
             set
             {
                 if (value == null || FindComponent(value.Name) != null)
-                {
                     throw new ArgumentException("Object is not a component or already exists");
-                }
-                IComponent component = value;
+                var component = value;
                 UnsubscribeFrom(_circuits[index]);
                 _circuits[index] = component;
                 SubscribeTo(_circuits[index]);
                 CircuitChanged?.Invoke(this, new EventArgs());
             }
         }
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        ///     Событие при изменении контура
-        /// </summary>
-        public event EventHandler CircuitChanged;
 
         #endregion
 
@@ -208,7 +211,7 @@ namespace Model.Circuits
         }
 
         /// <summary>
-        /// Поиск элементов
+        ///     Поиск элементов
         /// </summary>
         /// <param name="name"> Имя элемента </param>
         /// <returns></returns>
@@ -238,7 +241,5 @@ namespace Model.Circuits
         #endregion
 
         #endregion
-
-        
     }
 }

@@ -37,6 +37,12 @@ namespace View
                 if (value is IElement)
                 {
                     var element = value as IElement;
+                    if (value is Inductor)
+                        ElementTypeCombo.SelectedIndex = 0;
+                    if (value is Capacitor)
+                        ElementTypeCombo.SelectedIndex = 1;
+                    if (value is Resistor)
+                        ElementTypeCombo.SelectedIndex = 2;
                     ValueTextBox.Text = Convert.ToString(element.Value, CultureInfo.CurrentCulture);
                     NameTextBox.Text = element.Name;
                 }
@@ -64,10 +70,7 @@ namespace View
         {
             InitializeComponent();
             if (element != null)
-            {
                 Element = element;
-                
-            }
         }
 
         #endregion

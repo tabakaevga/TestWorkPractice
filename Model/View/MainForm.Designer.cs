@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.CircuitsGroup = new System.Windows.Forms.GroupBox();
             this.CircuitsList = new System.Windows.Forms.ListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.FileDropDown = new System.Windows.Forms.ToolStripDropDownButton();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,8 +42,11 @@
             this.button3 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.DrawButton = new System.Windows.Forms.Button();
+            this.CircuitBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CircuitsGroup.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CircuitBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // CircuitsGroup
@@ -81,7 +84,6 @@
             // 
             this.FileDropDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.FileDropDown.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
             this.openToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -91,30 +93,24 @@
             this.FileDropDown.Size = new System.Drawing.Size(38, 22);
             this.FileDropDown.Text = "File";
             // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.newToolStripMenuItem.Text = "New";
-            // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // AddCircuit
@@ -156,11 +152,22 @@
             // 
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // DrawButton
+            // 
+            this.DrawButton.Location = new System.Drawing.Point(12, 334);
+            this.DrawButton.Name = "DrawButton";
+            this.DrawButton.Size = new System.Drawing.Size(91, 23);
+            this.DrawButton.TabIndex = 5;
+            this.DrawButton.Text = "Draw Circuit";
+            this.DrawButton.UseVisualStyleBackColor = true;
+            this.DrawButton.Click += new System.EventHandler(this.DrawButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 363);
+            this.ClientSize = new System.Drawing.Size(334, 371);
+            this.Controls.Add(this.DrawButton);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.RemoveCircuit);
             this.Controls.Add(this.AddCircuit);
@@ -172,6 +179,7 @@
             this.CircuitsGroup.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CircuitBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,7 +191,6 @@
         private System.Windows.Forms.ListBox CircuitsList;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripDropDownButton FileDropDown;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
@@ -192,6 +199,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button DrawButton;
+        private System.Windows.Forms.BindingSource CircuitBindingSource;
     }
 }
 
