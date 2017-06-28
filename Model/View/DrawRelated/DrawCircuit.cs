@@ -5,14 +5,14 @@ using Model;
 namespace View.DrawRelated
 {
     /// <summary>
-    /// Форма отрисовки цепи
+    ///     Форма отрисовки цепи
     /// </summary>
     public partial class DrawCircuit : Form
     {
         #region Constructs
 
         /// <summary>
-        /// Конструктор для отрисовки цепи
+        ///     Конструктор для отрисовки цепи
         /// </summary>
         /// <param name="circuit">Отрисовываемая цепь</param>
         public DrawCircuit(IComponent circuit)

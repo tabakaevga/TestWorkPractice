@@ -7,14 +7,14 @@ using Model.Elements;
 namespace View.CircuitForms
 {
     /// <summary>
-    /// Форма последовательного соединения
+    ///     Форма последовательного соединения
     /// </summary>
     public partial class SerialCircuitEditor : Form
     {
         #region Private variables
 
         /// <summary>
-        ///     Список параллельных элементов
+        ///     Список последовательных элементов
         /// </summary>
         private readonly SerialCircuit _circuit;
 
@@ -22,6 +22,9 @@ namespace View.CircuitForms
 
         #region Public Properties
 
+        /// <summary>
+        ///     Создаваемое соединение
+        /// </summary>
         public IComponent CircuitSent { get; private set; }
 
         #endregion

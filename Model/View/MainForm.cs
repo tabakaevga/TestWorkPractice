@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Windows.Forms;
 using Model.Circuits;
+using Model.Elements;
 using View.CircuitForms;
 using View.DrawRelated;
 using View.Tools;
@@ -10,19 +12,11 @@ using IComponent = Model.IComponent;
 
 namespace View
 {
+    /// <summary>
+    /// Главная форма
+    /// </summary>
     public partial class MainForm : Form
     {
-        #region Private members
-
-        /// <summary>
-        ///     Список двухполюсников
-        /// </summary>
-        private List<IComponent> _circuitList;
-
-        private ZViewer _zViewerForm;
-
-        #endregion
-
         #region Constructs
 
         /// <summary>
@@ -31,7 +25,6 @@ namespace View
         public MainForm()
         {
             _circuitList = new List<IComponent>();
-            
             InitializeComponent();
         }
 
@@ -51,6 +44,24 @@ namespace View
 
         #endregion
 
+        #region Private members
+
+        /// <summary>
+        ///     Список двухполюсников
+        /// </summary>
+        private List<IComponent> _circuitList;
+
+        private readonly List<double> _frequencies = new List<double>
+        {
+            50,
+            20,
+            3000,
+            0.1,
+            1000000
+        };
+
+        #endregion
+
         #region Handlers
 
         /// <summary>
@@ -62,6 +73,46 @@ namespace View
         {
             var draw = new DrawCircuit(_circuitList[CircuitsList.SelectedIndex]);
             draw.ShowDialog();
+        }
+
+
+        /// <summary>
+        /// Обработчик события нажатия на кнопку расчета
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalcButton_Click(object sender, EventArgs e)
+        {
+            ZGridView.Rows.Clear();
+            if (CircuitsList.SelectedIndex >= 0)
+                foreach (var frequency in _frequencies)
+                {
+                    var z = _circuitList[CircuitsList.SelectedIndex].CalculateZ(frequency);
+
+                    ZGridView.Rows.Add(
+                        Convert.ToString(Math.Round(z.Real, 4), CultureInfo.CurrentCulture) + " + i" 
+                        + Convert.ToString(Math.Round(z.Imaginary, 4), CultureInfo.CurrentCulture),
+                        Convert.ToString(frequency, CultureInfo.CurrentCulture));
+                }
+        }
+
+        /// <summary>
+        /// Обработчик события изменения цепи
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CircuitsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_circuitList[CircuitsList.SelectedIndex] is ICircuit)
+            {
+                var circuit = _circuitList[CircuitsList.SelectedIndex] as ICircuit;
+                circuit.CircuitChanged += CalcButton_Click;
+            }
+            if (_circuitList[CircuitsList.SelectedIndex] is IElement)
+            {
+                var circuit = _circuitList[CircuitsList.SelectedIndex] as IElement;
+                circuit.ValueChanged += CalcButton_Click;
+            }
         }
 
         /// <summary>

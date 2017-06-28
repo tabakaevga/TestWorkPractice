@@ -7,7 +7,7 @@ using Model.Elements;
 namespace View.CircuitForms
 {
     /// <summary>
-    /// Форма параллельного соединения
+    ///     Форма параллельного соединения
     /// </summary>
     public partial class ParallelCircuitEditor : Form
     {

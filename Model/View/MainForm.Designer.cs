@@ -39,14 +39,21 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddCircuit = new System.Windows.Forms.Button();
             this.RemoveCircuit = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.CalcButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.DrawButton = new System.Windows.Forms.Button();
             this.CircuitBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ZGroupBox = new System.Windows.Forms.GroupBox();
+            this.ZGridView = new System.Windows.Forms.DataGridView();
+            this.ZColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FreqColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.CircuitsGroup.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CircuitBindingSource)).BeginInit();
+            this.ZGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // CircuitsGroup
@@ -66,6 +73,7 @@
             this.CircuitsList.Name = "CircuitsList";
             this.CircuitsList.Size = new System.Drawing.Size(298, 238);
             this.CircuitsList.TabIndex = 0;
+            this.CircuitsList.SelectedIndexChanged += new System.EventHandler(this.CircuitsList_SelectedIndexChanged);
             this.CircuitsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.CircuitsList_MouseDoubleClick);
             // 
             // toolStrip1
@@ -76,9 +84,10 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStrip1.Size = new System.Drawing.Size(334, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(584, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.Visible = false;
             // 
             // FileDropDown
             // 
@@ -96,21 +105,21 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // AddCircuit
@@ -133,14 +142,15 @@
             this.RemoveCircuit.UseVisualStyleBackColor = true;
             this.RemoveCircuit.Click += new System.EventHandler(this.RemoveCircuit_Click);
             // 
-            // button3
+            // CalcButton
             // 
-            this.button3.Location = new System.Drawing.Point(238, 305);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(84, 46);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Switch to Calc";
-            this.button3.UseVisualStyleBackColor = true;
+            this.CalcButton.Location = new System.Drawing.Point(338, 305);
+            this.CalcButton.Name = "CalcButton";
+            this.CalcButton.Size = new System.Drawing.Size(91, 23);
+            this.CalcButton.TabIndex = 4;
+            this.CalcButton.Text = "Calc Z";
+            this.CalcButton.UseVisualStyleBackColor = true;
+            this.CalcButton.Click += new System.EventHandler(this.CalcButton_Click);
             // 
             // saveFileDialog1
             // 
@@ -154,7 +164,7 @@
             // 
             // DrawButton
             // 
-            this.DrawButton.Location = new System.Drawing.Point(12, 334);
+            this.DrawButton.Location = new System.Drawing.Point(206, 305);
             this.DrawButton.Name = "DrawButton";
             this.DrawButton.Size = new System.Drawing.Size(91, 23);
             this.DrawButton.TabIndex = 5;
@@ -162,13 +172,45 @@
             this.DrawButton.UseVisualStyleBackColor = true;
             this.DrawButton.Click += new System.EventHandler(this.DrawButton_Click);
             // 
+            // ZGroupBox
+            // 
+            this.ZGroupBox.Controls.Add(this.ZGridView);
+            this.ZGroupBox.Location = new System.Drawing.Point(338, 28);
+            this.ZGroupBox.Name = "ZGroupBox";
+            this.ZGroupBox.Size = new System.Drawing.Size(234, 262);
+            this.ZGroupBox.TabIndex = 6;
+            this.ZGroupBox.TabStop = false;
+            this.ZGroupBox.Text = "Z:";
+            // 
+            // ZGridView
+            // 
+            this.ZGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ZGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ZColumn,
+            this.FreqColumn});
+            this.ZGridView.Location = new System.Drawing.Point(6, 18);
+            this.ZGridView.Name = "ZGridView";
+            this.ZGridView.Size = new System.Drawing.Size(222, 238);
+            this.ZGridView.TabIndex = 0;
+            // 
+            // ZColumn
+            // 
+            this.ZColumn.HeaderText = "Z";
+            this.ZColumn.Name = "ZColumn";
+            // 
+            // FreqColumn
+            // 
+            this.FreqColumn.HeaderText = "Frequency";
+            this.FreqColumn.Name = "FreqColumn";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 371);
+            this.ClientSize = new System.Drawing.Size(584, 366);
+            this.Controls.Add(this.ZGroupBox);
             this.Controls.Add(this.DrawButton);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.CalcButton);
             this.Controls.Add(this.RemoveCircuit);
             this.Controls.Add(this.AddCircuit);
             this.Controls.Add(this.toolStrip1);
@@ -180,6 +222,8 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CircuitBindingSource)).EndInit();
+            this.ZGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ZGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,11 +240,16 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button AddCircuit;
         private System.Windows.Forms.Button RemoveCircuit;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button CalcButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button DrawButton;
         private System.Windows.Forms.BindingSource CircuitBindingSource;
+        private System.Windows.Forms.GroupBox ZGroupBox;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ZColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FreqColumn;
+        private System.Windows.Forms.DataGridView ZGridView;
     }
 }
 

@@ -64,8 +64,8 @@ namespace Model.Circuits
             get { return _circuits[index]; }
             set
             {
-                if (value == null || FindComponent(value.Name) != null)
-                    throw new ArgumentException("Object is not a component or already exists");
+                if (value == null)
+                    throw new ArgumentException("Object is not a component");
                 var component = value;
                 UnsubscribeFrom(_circuits[index]);
                 _circuits[index] = component;
