@@ -3,8 +3,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace View.Tools
 {
+    ///TODO: комментарии
     internal class Serializer
     {
+        ///TODO: думаю тут тоже надо поставить регион
         /// <summary>
         ///     Сериализатор данных
         /// </summary>

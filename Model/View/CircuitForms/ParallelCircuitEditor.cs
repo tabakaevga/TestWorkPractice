@@ -4,6 +4,10 @@ using Model;
 using Model.Circuits;
 using Model.Elements;
 
+
+/// TODO: Если не ошибаюсь то нас учили ставить button`ы в нижнем правом углу, OK потом Cancel 
+/// TODO: Ещеб можно было поставить TabIndex - не критично) 
+
 namespace View.CircuitForms
 {
     /// <summary>

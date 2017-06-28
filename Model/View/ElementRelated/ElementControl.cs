@@ -13,6 +13,7 @@ namespace View
     {
         #region Public properties
 
+        ///TODO: я бы пояснил конкретнее что делет свойство
         /// <summary>
         ///     Свойство Элемент
         /// </summary>
