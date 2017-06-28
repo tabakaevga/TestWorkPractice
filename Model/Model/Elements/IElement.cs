@@ -1,26 +1,20 @@
 ﻿using System;
-using Model.Elements;
 
-namespace Model
+namespace Model.Elements
 {
     /// <summary>
-    /// Интерфейс элементов цепи
+    ///     Интерфейс элементов цепи
     /// </summary>
     public interface IElement : IComponent
     {
         /// <summary>
-        /// Событие изменения цепи
-        /// </summary>
-        event EventHandler ValueChanged;
-
-        /// <summary>
-        /// Тип элемента
-        /// </summary>
-        ElementTypes Type { get; }
-
-        /// <summary>
-        /// Значение сопротивления элемента
+        ///     Значение сопротивления элемента
         /// </summary>
         double Value { get; set; }
+
+        /// <summary>
+        ///     Событие изменения цепи
+        /// </summary>
+        event EventHandler ValueChanged;
     }
 }

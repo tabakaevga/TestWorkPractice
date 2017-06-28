@@ -40,7 +40,8 @@
             this.AddCircuit = new System.Windows.Forms.Button();
             this.RemoveCircuit = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.CircuitsGroup.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,7 @@
             this.CircuitsList.Name = "CircuitsList";
             this.CircuitsList.Size = new System.Drawing.Size(298, 238);
             this.CircuitsList.TabIndex = 0;
+            this.CircuitsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.CircuitsList_MouseDoubleClick);
             // 
             // toolStrip1
             // 
@@ -100,12 +102,14 @@
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -121,6 +125,7 @@
             this.AddCircuit.TabIndex = 2;
             this.AddCircuit.Text = "Add Circuit";
             this.AddCircuit.UseVisualStyleBackColor = true;
+            this.AddCircuit.Click += new System.EventHandler(this.AddCircuit_Click);
             // 
             // RemoveCircuit
             // 
@@ -130,6 +135,7 @@
             this.RemoveCircuit.TabIndex = 3;
             this.RemoveCircuit.Text = "Remove Circuit";
             this.RemoveCircuit.UseVisualStyleBackColor = true;
+            this.RemoveCircuit.Click += new System.EventHandler(this.RemoveCircuit_Click);
             // 
             // button3
             // 
@@ -139,21 +145,24 @@
             this.button3.TabIndex = 4;
             this.button3.Text = "Switch to Calc";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // textBox1
+            // saveFileDialog1
             // 
-            this.textBox1.Location = new System.Drawing.Point(100, 334);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
+            this.saveFileDialog1.DefaultExt = "tw";
+            this.saveFileDialog1.Filter = "TW Files|*.tw\".";
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "Schema 1";
+            this.openFileDialog1.Filter = "TW Files|*.tw\".";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 363);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.RemoveCircuit);
             this.Controls.Add(this.AddCircuit);
@@ -183,7 +192,8 @@
         private System.Windows.Forms.Button AddCircuit;
         private System.Windows.Forms.Button RemoveCircuit;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

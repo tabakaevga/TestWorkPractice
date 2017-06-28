@@ -2,42 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+using Model.Elements;
 using Model.Tools;
 
 namespace Model.Circuits
 {
-    public class SerialCircuit
+    /// <summary>
+    /// Класс последовательного соединения
+    /// </summary>
+    [Serializable]
+    public class SerialCircuit : IComponent
     {
-
-        #region Private Fields
-
-        /// <summary>
-        /// Список компонентов параллельного соединения
-        /// </summary>
-        private readonly List<IComponent> _circuits;
-
-        /// <summary>
-        /// Наименование параллельного соединения
-        /// </summary>
-        private string _name;
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        /// Событие при изменении контура
-        /// </summary>
-        public event EventHandler CircuitChanged;
-
-        #endregion
-
         #region Constructs
 
         /// <summary>
-        /// Конструктор параллельного соединения
+        ///     Конструктор параллельного соединения
         /// </summary>
         public SerialCircuit()
         {
@@ -49,7 +28,7 @@ namespace Model.Circuits
         #region Properties
 
         /// <summary>
-        /// Наименование элемента
+        ///     Наименование элемента
         /// </summary>
         public string Name
         {
@@ -61,6 +40,51 @@ namespace Model.Circuits
             }
         }
 
+        /// <summary>
+        /// Индексатор списка
+        /// </summary>
+        /// <param name="index"> Индекс </param>
+        /// <returns></returns>
+        public IComponent this[int index]
+        {
+            get { return _circuits[index]; }
+            set
+            {
+                if (value == null || FindComponent(value.Name) != null)
+                {
+                    throw new ArgumentException("Object is not a component or already exists");
+                }
+                IComponent component = value;
+                UnsubscribeFrom(_circuits[index]);
+                _circuits[index] = component;
+                SubscribeTo(_circuits[index]);
+                CircuitChanged?.Invoke(this, new EventArgs());
+            }
+        }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        ///     Событие при изменении контура
+        /// </summary>
+        public event EventHandler CircuitChanged;
+
+        #endregion
+
+        #region Private Fields
+
+        /// <summary>
+        ///     Список компонентов параллельного соединения
+        /// </summary>
+        private readonly List<IComponent> _circuits;
+
+        /// <summary>
+        ///     Наименование параллельного соединения
+        /// </summary>
+        private string _name;
+
         #endregion
 
         #region Methods
@@ -68,7 +92,25 @@ namespace Model.Circuits
         #region Public Methods
 
         /// <summary>
-        /// Импеданс
+        ///     Перечисление компонентов
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator<IComponent> GetEnumerator()
+        {
+            return _circuits.GetEnumerator();
+        }
+
+        /// <summary>
+        ///     Проверка на наличие объектов
+        /// </summary>
+        /// <returns></returns>
+        public bool Any()
+        {
+            return _circuits.Any();
+        }
+
+        /// <summary>
+        ///     Импеданс
         /// </summary>
         /// <param name="frequency"> Частота </param>
         public Complex CalculateZ(double frequency)
@@ -76,49 +118,37 @@ namespace Model.Circuits
             Validator.ValidateDouble(frequency);
             var sum = new Complex();
             if (!_circuits.Any())
-            {
                 return new Complex(0, 0);
-            }
-            foreach (IComponent component in _circuits)
-            {
+            foreach (var component in _circuits)
                 sum += component.CalculateZ(frequency);
-            }
             return sum;
         }
 
         /// <summary>
-        /// Добавление компонента
+        ///     Добавление компонента
         /// </summary>
         /// <param name="component"> Добавляемый компонент </param>
         public void Add(IComponent component)
         {
             if (component == null)
-            {
                 throw new ArgumentException("Can't add null components.");
-            }
             if (_circuits.FirstOrDefault(c => c.Name == component.Name) != null)
-            {
                 throw new ArgumentException("Component with this name already exists.");
-            }
             _circuits.Add(component);
             OnCircuitChanged(this, new EventArgs());
             SubscribeTo(component);
         }
 
         /// <summary>
-        /// Удаление компонента
+        ///     Удаление компонента
         /// </summary>
         /// <param name="component"> Удаляемый компонент </param>
         public void Remove(IComponent component)
         {
             if (!_circuits.Any())
-            {
                 throw new ArgumentException("Can't remove from empty list.");
-            }
-            if (_circuits.FirstOrDefault(c => c.Name == component.Name) == null)
-            {
+            if (FindComponent(component.Name) == null)
                 throw new ArgumentException("Component with this name doesn't exist.");
-            }
             _circuits.Remove(component);
             OnCircuitChanged(this, new EventArgs());
             UnsubscribeFrom(component);
@@ -129,7 +159,7 @@ namespace Model.Circuits
         #region Protected Methods
 
         /// <summary>
-        /// Метод события
+        ///     Метод события
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -139,15 +169,13 @@ namespace Model.Circuits
         }
 
         /// <summary>
-        /// Удаление компонента по индексу
+        ///     Удаление компонента по индексу
         /// </summary>
         /// <param name="index"></param>
         public void RemoveAt(int index)
         {
             if (!_circuits.Any())
-            {
                 throw new ArgumentException("Can't remove from empty list.");
-            }
             index++;
             Validator.ValidateDouble(index);
             index--;
@@ -159,11 +187,10 @@ namespace Model.Circuits
 
         #endregion
 
-
         #region Private Methods
 
         /// <summary>
-        /// Отписаться от компонента
+        ///     Отписаться от компонента
         /// </summary>
         /// <param name="component">Компонент цепи </param>
         private void UnsubscribeFrom(IComponent component)
@@ -181,7 +208,17 @@ namespace Model.Circuits
         }
 
         /// <summary>
-        /// Подписаться на компонент
+        /// Поиск элементов
+        /// </summary>
+        /// <param name="name"> Имя элемента </param>
+        /// <returns></returns>
+        private IComponent FindComponent(string name)
+        {
+            return _circuits.FirstOrDefault(c => c.Name == name);
+        }
+
+        /// <summary>
+        ///     Подписаться на компонент
         /// </summary>
         /// <param name="component">Компонент цепи </param>
         private void SubscribeTo(IComponent component)
@@ -201,6 +238,7 @@ namespace Model.Circuits
         #endregion
 
         #endregion
+
+        
     }
 }
-

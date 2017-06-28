@@ -50,11 +50,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseCircuitEditor.cs">
+    <Compile Include="CircuitForms\ParallelCircuitEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BaseCircuitEditor.Designer.cs">
-      <DependentUpon>BaseCircuitEditor.cs</DependentUpon>
+    <Compile Include="CircuitForms\ParallelCircuitEditor.Designer.cs">
+      <DependentUpon>ParallelCircuitEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CircuitForms\SerialCircuitEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CircuitForms\SerialCircuitEditor.Designer.cs">
+      <DependentUpon>SerialCircuitEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="ElementControl.cs">
       <SubType>UserControl</SubType>
@@ -82,20 +88,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ParallelSubcircuitEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ParallelSubcircuitEditor.Designer.cs">
-      <DependentUpon>ParallelSubcircuitEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SerialSubcircuitEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SerialSubcircuitEditor.Designer.cs">
-      <DependentUpon>SerialSubcircuitEditor.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="BaseCircuitEditor.resx">
-      <DependentUpon>BaseCircuitEditor.cs</DependentUpon>
+    <Compile Include="Tools\Serializer.cs" />
+    <EmbeddedResource Include="CircuitForms\ParallelCircuitEditor.resx">
+      <DependentUpon>ParallelCircuitEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CircuitForms\SerialCircuitEditor.resx">
+      <DependentUpon>SerialCircuitEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ElementControl.resx">
       <DependentUpon>ElementControl.cs</DependentUpon>
@@ -118,9 +116,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ParallelSubcircuitEditor.resx">
-      <DependentUpon>ParallelSubcircuitEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

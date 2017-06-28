@@ -1,24 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
+using Model.Elements;
 
 namespace View
 {
     /// <summary>
-    /// Форма редактора элемента
+    ///     Форма редактора элемента
     /// </summary>
     public partial class ElementEditor : Form
     {
+        #region Public Properties
+
+        /// <summary>
+        ///     Свойство для передачи в родительскую форму
+        /// </summary>
+        public IComponent ElementSent { get; private set; }
+
+        #endregion
+
         #region Constructs
 
         /// <summary>
-        /// Конструктор на добавление элемента
+        ///     Конструктор на добавление элемента
         /// </summary>
         public ElementEditor()
         {
@@ -26,7 +30,7 @@ namespace View
         }
 
         /// <summary>
-        /// Конструктор на изменение элемента
+        ///     Конструктор на изменение элемента
         /// </summary>
         /// <param name="element">Изменяемый элемент</param>
         public ElementEditor(IComponent element)
@@ -41,19 +45,10 @@ namespace View
 
         #endregion
 
-        #region Public Properties
-
-        /// <summary>
-        /// Свойство для передачи в родительскую форму
-        /// </summary>
-        public IComponent ElementSent { get; private set; }
-
-        #endregion
-
         #region Private Methods
 
         /// <summary>
-        /// Обработчик кнопки ОК
+        ///     Обработчик кнопки ОК
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -64,14 +59,14 @@ namespace View
                 ElementSent = elementControl1.Element;
                 Close();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 throw new NotImplementedException("Скоро допишу");
             }
         }
 
         /// <summary>
-        /// Обработчик кнопки Cancel
+        ///     Обработчик кнопки Cancel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -82,10 +77,5 @@ namespace View
         }
 
         #endregion
-
-
-
-
-
     }
 }

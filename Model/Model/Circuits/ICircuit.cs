@@ -3,12 +3,12 @@
 namespace Model.Circuits
 {
     /// <summary>
-    /// Контур цепи/Соединение
+    ///     Контур цепи/Соединение
     /// </summary>
-    interface ICircuit : IComponent
+    public interface ICircuit : IComponent
     {
         /// <summary>
-        /// Событие изменения контура
+        ///     Событие изменения контура
         /// </summary>
         event EventHandler CircuitChanged;
     }

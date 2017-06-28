@@ -1,45 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Model;
 using Model.Circuits;
-using Model.Elements;
+using View.CircuitForms;
+using View.Tools;
 
 namespace View
 {
     public partial class MainForm : Form
     {
+        private List<IComponent> _circuitList;
+
         public MainForm()
         {
+            _circuitList = new List<IComponent>();
             InitializeComponent();
-            var f = new Form1(new SerialCircuit());
+        }
+
+        private void RefillList()
+        {
+            CircuitsList.Items.Clear();
+            foreach (IComponent component in _circuitList)
+            {
+                CircuitsList.Items.Add(component.Name);
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+        }
+
+        private void saveFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Serializer.SerializeBinary(saveFileDialog1.FileName, ref _circuitList);
+        }
+
+        private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Serializer.DeserializeBinary(openFileDialog1.FileName, ref _circuitList);
+        }
+
+        private void AddCircuit_Click(object sender, EventArgs e)
+        {
+            var f = new SerialCircuitEditor();
             f.ShowDialog();
+            if (f.CircuitSent != null)
+            {
+                _circuitList.Add(f.CircuitSent);
+            }
+            RefillList();
         }
 
-        private int index = 0;
-
-        private void button3_Click(object sender, EventArgs e)
+        private void CircuitsList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            SerialCircuit circuit = new SerialCircuit();
-            circuit.CircuitChanged += circuit_OnCircuitChanged;
-            circuit.Add(new Resistor(4, "R1"));
-            ParallelCircuit p = new ParallelCircuit();
-            p.CircuitChanged += circuit_OnCircuitChanged;
-            p.Add(new Capacitor(0.000005, "C1"));
-            p.Add(new Inductor(0.2, "L1"));
-            circuit.Add(p);
-            textBox1.Text = Convert.ToString(circuit.CalculateZ(50).Real) + '+' + Convert.ToString(circuit.CalculateZ(50).Imaginary);
-
+            int index = CircuitsList.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                var f = new SerialCircuitEditor(_circuitList[index] as SerialCircuit);
+                f.ShowDialog();
+                if (f.CircuitSent != null)
+                {
+                    _circuitList[index] = f.CircuitSent;
+                    RefillList();
+                }
+            }
         }
 
-        private void circuit_OnCircuitChanged(object sender, EventArgs e)
+        private void RemoveCircuit_Click(object sender, EventArgs e)
         {
-            button3.Text = Convert.ToString(index++);
+            _circuitList.RemoveAt(CircuitsList.SelectedIndex);
+            RefillList();
         }
     }
 }

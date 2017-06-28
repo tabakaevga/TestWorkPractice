@@ -3,48 +3,64 @@ using System.Numerics;
 using Model.Tools;
 
 //См Inductor
+
 namespace Model.Elements
 {
     /// <summary>
-    /// Класс резистор
+    ///     Класс резистор
     /// </summary>
+    [Serializable]
     public class Resistor : IElement
     {
+        #region Events
+
+        /// <summary>
+        ///     События изменения сопротивления
+        /// </summary>
+        public event EventHandler ValueChanged;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Импеданс
+        /// </summary>
+        /// <param name="frequency"> Частота тока </param>
+        public Complex CalculateZ(double frequency)
+        {
+            Validator.ValidateDouble(frequency);
+            return new Complex(Value, 0);
+        }
+
+        #endregion
+
         #region private members
 
         /// <summary>
-        /// Переменная сопротивления
+        ///     Переменная сопротивления
         /// </summary>
         private double _value;
 
         /// <summary>
-        /// Переменная имени
+        ///     Переменная имени
         /// </summary>
         private string _name;
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        /// События изменения сопротивления
-        /// </summary>
-        public event EventHandler ValueChanged;
 
         #endregion
 
         #region Constructs
 
         /// <summary>
-        /// Пустой конструктор объекта катушки
+        ///     Пустой конструктор объекта катушки
         /// </summary>
-        public Resistor():
+        public Resistor() :
             this(1, "Resistor #1.")
         {
         }
 
         /// <summary>
-        /// Конструктор объекта катушки
+        ///     Конструктор объекта катушки
         /// </summary>
         /// <param name="value"> Значение сопротивления </param>
         /// <param name="name"> Наименование элемента </param>
@@ -61,12 +77,7 @@ namespace Model.Elements
         #region Properties
 
         /// <summary>
-        /// Тип элемента
-        /// </summary>
-        public ElementTypes Type => ElementTypes.Resistor;
-
-        /// <summary>
-        /// Наименование элемента
+        ///     Наименование элемента
         /// </summary>
         public string Name
         {
@@ -79,7 +90,7 @@ namespace Model.Elements
         }
 
         /// <summary>
-        /// Сопротивление
+        ///     Сопротивление
         /// </summary>
         public double Value
         {
@@ -89,28 +100,10 @@ namespace Model.Elements
                 Validator.ValidateDouble(value);
                 _value = value;
                 if (Math.Abs(value - _value) > 0.0000000000000000000000000000000001)
-                {
                     ValueChanged?.Invoke(this, new EventArgs());
-                }
             }
         }
 
         #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Импеданс
-        /// </summary>
-        /// <param name="frequency"> Частота тока </param>
-        public Complex CalculateZ(double frequency)
-        {
-            Validator.ValidateDouble(frequency);
-            return new Complex(Value, 0);
-        }
-
-        #endregion
-
-
     }
 }
