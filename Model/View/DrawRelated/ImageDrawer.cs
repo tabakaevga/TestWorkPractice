@@ -6,6 +6,7 @@ using Model.Elements;
 
 namespace View.DrawRelated
 {
+    ///TODO: Комментарии
     internal static class ImageDrawer
     {
         #region Public Methods

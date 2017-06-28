@@ -4,6 +4,8 @@ using Model;
 using Model.Circuits;
 using Model.Elements;
 
+///TODO: тоже что и в ParallelCircuitEditor
+
 namespace View.CircuitForms
 {
     /// <summary>

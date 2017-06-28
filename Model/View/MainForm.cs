@@ -51,6 +51,7 @@ namespace View
         /// </summary>
         private List<IComponent> _circuitList;
 
+        ///TODO: комментарии
         private readonly List<double> _frequencies = new List<double>
         {
             50,
