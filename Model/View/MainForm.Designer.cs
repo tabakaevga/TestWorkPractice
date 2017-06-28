@@ -148,14 +148,12 @@
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.DefaultExt = "tw";
-            this.saveFileDialog1.Filter = "TW Files|*.tw\".";
+            this.saveFileDialog1.FileName = "Schema 1";
+            this.saveFileDialog1.Filter = "TW Files| *.tw.";
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "Schema 1";
-            this.openFileDialog1.Filter = "TW Files|*.tw\".";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // MainForm

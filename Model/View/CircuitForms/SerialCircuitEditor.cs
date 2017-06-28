@@ -146,8 +146,11 @@ namespace View.CircuitForms
             Close();
         }
 
-        #endregion
-
+        /// <summary>
+        /// Обрабочтик двойного нажатия на компонент в списке
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComponentsListBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int index = ComponentsListBox.IndexFromPoint(e.Location);
@@ -158,10 +161,27 @@ namespace View.CircuitForms
                     IElement element = _circuit[index] as IElement;
                     var f = new ElementEditor(element);
                     f.ShowDialog();
-                    
-
+                    if (f.ElementSent != null)
+                    {
+                        _circuit[index] = f.ElementSent;
+                    }
                 }
+                if (_circuit[index] is ParallelCircuit)
+                {
+                    ParallelCircuit circuit = _circuit[index] as ParallelCircuit;
+                    var f = new ParallelCircuitEditor(circuit);
+                    f.ShowDialog();
+                    if (f.CircuitSent != null)
+                    {
+                        _circuit[index] = f.CircuitSent;
+                    }
+                }
+                RebindList();
             }
         }
+
+        #endregion
+
+        
     }
 }

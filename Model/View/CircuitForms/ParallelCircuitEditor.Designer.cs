@@ -107,6 +107,7 @@
             this.ComponentsListBox.Name = "ComponentsListBox";
             this.ComponentsListBox.Size = new System.Drawing.Size(209, 212);
             this.ComponentsListBox.TabIndex = 0;
+            this.ComponentsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ComponentsListBox_MouseDoubleClick);
             // 
             // NameLabel
             // 

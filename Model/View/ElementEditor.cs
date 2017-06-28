@@ -61,7 +61,7 @@ namespace View
             }
             catch (Exception)
             {
-                throw new NotImplementedException("Скоро допишу");
+                MessageBox.Show("Fields must be correct", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

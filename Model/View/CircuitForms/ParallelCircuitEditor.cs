@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Model;
 using Model.Circuits;
+using Model.Elements;
 
 namespace View.CircuitForms
 {
@@ -36,6 +37,7 @@ namespace View.CircuitForms
         {
             InitializeComponent();
             _circuit = circuit;
+            NameTextBox.Text = _circuit.Name;
             RebindList();
             _circuit.CircuitChanged += _circuit_OnCircuitChanged;
         }
@@ -144,13 +146,41 @@ namespace View.CircuitForms
             Close();
         }
 
+        /// <summary>
+        /// Обработчик события двойного клика на Списке компонентов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComponentsListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = ComponentsListBox.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
+            {
+                if (_circuit[index] is IElement)
+                {
+                    IElement element = _circuit[index] as IElement;
+                    var f = new ElementEditor(element);
+                    f.ShowDialog();
+                    if (f.ElementSent != null)
+                    {
+                        _circuit[index] = f.ElementSent;
+                    }
+                }
+                if (_circuit[index] is SerialCircuit)
+                {
+                    SerialCircuit circuit = _circuit[index] as SerialCircuit;
+                    var f = new SerialCircuitEditor(circuit);
+                    f.ShowDialog();
+                    if (f.CircuitSent != null)
+                    {
+                        _circuit[index] = f.CircuitSent;
+                    }
+                }
+                RebindList();
+            }
+        }
+
         #endregion
-
-
-
-
-
-
 
 
     }
