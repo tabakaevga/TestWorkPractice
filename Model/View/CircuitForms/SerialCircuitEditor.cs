@@ -6,6 +6,7 @@ using Model.Elements;
 
 namespace View.CircuitForms
 {
+    //BUG: при нажатии кнопки Cancel возвращается изменененая форма (если изменения были)
     /// <summary>
     ///     Форма последовательного соединения
     /// </summary>

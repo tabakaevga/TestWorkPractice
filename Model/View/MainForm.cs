@@ -13,7 +13,7 @@ using IComponent = Model.IComponent;
 namespace View
 {
     /// <summary>
-    /// Главная форма
+    ///     Главная форма
     /// </summary>
     public partial class MainForm : Form
     {
@@ -77,7 +77,7 @@ namespace View
 
 
         /// <summary>
-        /// Обработчик события нажатия на кнопку расчета
+        ///     Обработчик события нажатия на кнопку расчета
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -90,14 +90,14 @@ namespace View
                     var z = _circuitList[CircuitsList.SelectedIndex].CalculateZ(frequency);
 
                     ZGridView.Rows.Add(
-                        Convert.ToString(Math.Round(z.Real, 4), CultureInfo.CurrentCulture) + " + i" 
+                        Convert.ToString(Math.Round(z.Real, 4), CultureInfo.CurrentCulture) + " + i"
                         + Convert.ToString(Math.Round(z.Imaginary, 4), CultureInfo.CurrentCulture),
                         Convert.ToString(frequency, CultureInfo.CurrentCulture));
                 }
         }
 
         /// <summary>
-        /// Обработчик события изменения цепи
+        ///     Обработчик события изменения цепи
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
