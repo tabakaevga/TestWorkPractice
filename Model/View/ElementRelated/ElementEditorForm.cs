@@ -3,12 +3,12 @@ using System.Windows.Forms;
 using Model;
 using Model.Elements;
 
-namespace View
+namespace View.ElementRelated
 {
     /// <summary>
     ///     Форма редактора элемента
     /// </summary>
-    public partial class ElementEditor : Form
+    public partial class ElementEditorForm : Form
     {
         #region Public Properties
 
@@ -24,7 +24,7 @@ namespace View
         /// <summary>
         ///     Конструктор на добавление элемента
         /// </summary>
-        public ElementEditor()
+        public ElementEditorForm()
         {
             InitializeComponent();
         }
@@ -33,7 +33,7 @@ namespace View
         ///     Конструктор на изменение элемента
         /// </summary>
         /// <param name="element">Изменяемый элемент</param>
-        public ElementEditor(IComponent element)
+        public ElementEditorForm(IComponent element)
         {
             InitializeComponent();
             if (element is IElement)

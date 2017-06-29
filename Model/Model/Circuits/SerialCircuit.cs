@@ -1,10 +1,13 @@
-﻿//TODO: юзинги поместил бы в регион
+﻿#region Using
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Model.Elements;
 using Model.Tools;
+
+#endregion
 
 namespace Model.Circuits
 {
@@ -93,25 +96,7 @@ namespace Model.Circuits
 
         #region Methods
 
-        #region Public Methods
-
-        /// <summary>
-        ///     Перечисление компонентов
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerator<IComponent> GetEnumerator()
-        {
-            return _circuits.GetEnumerator();
-        }
-
-        /// <summary>
-        ///     Проверка на наличие объектов
-        /// </summary>
-        /// <returns></returns>
-        public bool Any()
-        {
-            return _circuits.Any();
-        }
+        #region Public Methods    
 
         /// <summary>
         ///     Импеданс
@@ -158,20 +143,6 @@ namespace Model.Circuits
             UnsubscribeFrom(component);
         }
 
-        #endregion
-
-        #region Protected Methods
-
-        /// <summary>
-        ///     Метод события
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected virtual void OnCircuitChanged(object sender, EventArgs e)
-        {
-            CircuitChanged?.Invoke(sender, e);
-        }
-
         /// <summary>
         ///     Удаление компонента по индексу
         /// </summary>
@@ -187,6 +158,56 @@ namespace Model.Circuits
             _circuits.RemoveAt(index);
             OnCircuitChanged(this, new EventArgs());
             UnsubscribeFrom(component);
+        }
+
+        /// <summary>
+        ///     Перечисление компонентов
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator<IComponent> GetEnumerator()
+        {
+            return _circuits.GetEnumerator();
+        }
+
+        /// <summary>
+        ///     Первый элемент
+        /// </summary>
+        /// <returns></returns>
+        public IComponent FirstOrDefault()
+        {
+            return _circuits.FirstOrDefault();
+        }
+
+        /// <summary>
+        ///     Последний элемент
+        /// </summary>
+        /// <returns></returns>
+        public IComponent LastOrDefault()
+        {
+            return _circuits.LastOrDefault();
+        }
+
+        /// <summary>
+        ///     Проверка на наличие объектов
+        /// </summary>
+        /// <returns></returns>
+        public bool Any()
+        {
+            return _circuits.Any();
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        ///     Метод события
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected virtual void OnCircuitChanged(object sender, EventArgs e)
+        {
+            CircuitChanged?.Invoke(sender, e);
         }
 
         #endregion

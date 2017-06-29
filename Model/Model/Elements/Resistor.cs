@@ -2,9 +2,6 @@
 using System.Numerics;
 using Model.Tools;
 
-//TODO:???))
-//См Inductor
-
 namespace Model.Elements
 {
     /// <summary>

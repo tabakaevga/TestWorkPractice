@@ -1,6 +1,6 @@
-﻿namespace View
+﻿namespace View.ElementRelated
 {
-    partial class ElementEditor
+    partial class ElementEditorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.ButtonOK = new System.Windows.Forms.Button();
             this.ButtonCancel = new System.Windows.Forms.Button();
-            this.elementControl1 = new View.ElementControl();
+            this.elementControl1 = new ElementControl();
             this.SuspendLayout();
             // 
             // ButtonOK

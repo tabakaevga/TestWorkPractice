@@ -1,4 +1,4 @@
-﻿namespace View
+﻿namespace View.ElementRelated
 {
     partial class ElementControl
     {

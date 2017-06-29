@@ -1,6 +1,6 @@
 ﻿namespace View.CircuitForms
 {
-    partial class SerialCircuitEditor
+    partial class SerialCircuitEditorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,6 @@
             this.ButtonOK = new System.Windows.Forms.Button();
             this.AddSubcircuitButton = new System.Windows.Forms.Button();
             this.AddElementButton = new System.Windows.Forms.Button();
-            this.ButtonCancel = new System.Windows.Forms.Button();
             this.RemoveComponentButton = new System.Windows.Forms.Button();
             this.ComponentsGroupBox = new System.Windows.Forms.GroupBox();
             this.ComponentsListBox = new System.Windows.Forms.ListBox();
@@ -69,16 +68,6 @@
             this.AddElementButton.Text = "Add Element";
             this.AddElementButton.UseVisualStyleBackColor = true;
             this.AddElementButton.Click += new System.EventHandler(this.AddElementButton_Click);
-            // 
-            // ButtonCancel
-            // 
-            this.ButtonCancel.Location = new System.Drawing.Point(93, 362);
-            this.ButtonCancel.Name = "ButtonCancel";
-            this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
-            this.ButtonCancel.TabIndex = 18;
-            this.ButtonCancel.Text = "Cancel";
-            this.ButtonCancel.UseVisualStyleBackColor = true;
-            this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // RemoveComponentButton
             // 
@@ -135,7 +124,6 @@
             this.Controls.Add(this.ButtonOK);
             this.Controls.Add(this.AddSubcircuitButton);
             this.Controls.Add(this.AddElementButton);
-            this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.RemoveComponentButton);
             this.Controls.Add(this.ComponentsGroupBox);
             this.Name = "SerialCircuitEditor";
@@ -151,7 +139,6 @@
         private System.Windows.Forms.Button ButtonOK;
         private System.Windows.Forms.Button AddSubcircuitButton;
         private System.Windows.Forms.Button AddElementButton;
-        private System.Windows.Forms.Button ButtonCancel;
         private System.Windows.Forms.Button RemoveComponentButton;
         private System.Windows.Forms.GroupBox ComponentsGroupBox;
         private System.Windows.Forms.ListBox ComponentsListBox;

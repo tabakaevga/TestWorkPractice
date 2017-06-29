@@ -50,17 +50,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircuitForms\ParallelCircuitEditor.cs">
+    <Compile Include="CircuitForms\ParallelCircuitEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CircuitForms\ParallelCircuitEditor.Designer.cs">
-      <DependentUpon>ParallelCircuitEditor.cs</DependentUpon>
+    <Compile Include="CircuitForms\ParallelCircuitEditorForm.Designer.cs">
+      <DependentUpon>ParallelCircuitEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CircuitForms\SerialCircuitEditor.cs">
+    <Compile Include="CircuitForms\SerialCircuitEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CircuitForms\SerialCircuitEditor.Designer.cs">
-      <DependentUpon>SerialCircuitEditor.cs</DependentUpon>
+    <Compile Include="CircuitForms\SerialCircuitEditorForm.Designer.cs">
+      <DependentUpon>SerialCircuitEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ElementRelated\ElementControl.cs">
       <SubType>UserControl</SubType>
@@ -68,19 +68,19 @@
     <Compile Include="ElementRelated\ElementControl.Designer.cs">
       <DependentUpon>ElementControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ElementRelated\ElementEditor.cs">
+    <Compile Include="ElementRelated\ElementEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ElementRelated\ElementEditor.Designer.cs">
-      <DependentUpon>ElementEditor.cs</DependentUpon>
+    <Compile Include="ElementRelated\ElementEditorForm.Designer.cs">
+      <DependentUpon>ElementEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawRelated\DrawCircuit.cs">
+    <Compile Include="DrawRelated\GraphicCircuitViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DrawRelated\DrawCircuit.Designer.cs">
-      <DependentUpon>DrawCircuit.cs</DependentUpon>
+    <Compile Include="DrawRelated\GraphicCircuitViewForm.Designer.cs">
+      <DependentUpon>GraphicCircuitViewForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawRelated\ImageDrawer.cs" />
+    <Compile Include="DrawRelated\CircuitImageDrawer.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,21 +89,22 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestCircuits.cs" />
     <Compile Include="Tools\Serializer.cs" />
-    <EmbeddedResource Include="CircuitForms\ParallelCircuitEditor.resx">
-      <DependentUpon>ParallelCircuitEditor.cs</DependentUpon>
+    <EmbeddedResource Include="CircuitForms\ParallelCircuitEditorForm.resx">
+      <DependentUpon>ParallelCircuitEditorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CircuitForms\SerialCircuitEditor.resx">
-      <DependentUpon>SerialCircuitEditor.cs</DependentUpon>
+    <EmbeddedResource Include="CircuitForms\SerialCircuitEditorForm.resx">
+      <DependentUpon>SerialCircuitEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ElementRelated\ElementControl.resx">
       <DependentUpon>ElementControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ElementRelated\ElementEditor.resx">
-      <DependentUpon>ElementEditor.cs</DependentUpon>
+    <EmbeddedResource Include="ElementRelated\ElementEditorForm.resx">
+      <DependentUpon>ElementEditorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DrawRelated\DrawCircuit.resx">
-      <DependentUpon>DrawCircuit.cs</DependentUpon>
+    <EmbeddedResource Include="DrawRelated\GraphicCircuitViewForm.resx">
+      <DependentUpon>GraphicCircuitViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

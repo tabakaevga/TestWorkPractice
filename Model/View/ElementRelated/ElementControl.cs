@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Globalization;
 using System.Windows.Forms;
 using Model;
 using Model.Elements;
 
-namespace View
+#endregion
+
+namespace View.ElementRelated
 {
     /// <summary>
     ///     Контрол элементов
@@ -13,9 +17,8 @@ namespace View
     {
         #region Public properties
 
-        ///TODO: я бы пояснил конкретнее что делет свойство
         /// <summary>
-        ///     Свойство Элемент
+        ///     Свойство, возвращающее готовый элемент с контрола
         /// </summary>
         public IComponent Element
         {

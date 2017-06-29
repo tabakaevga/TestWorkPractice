@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.CircuitsGroup = new System.Windows.Forms.GroupBox();
             this.CircuitsList = new System.Windows.Forms.ListBox();
@@ -43,15 +42,12 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.DrawButton = new System.Windows.Forms.Button();
-            this.CircuitBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ZGroupBox = new System.Windows.Forms.GroupBox();
             this.ZGridView = new System.Windows.Forms.DataGridView();
             this.ZColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FreqColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.CircuitsGroup.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CircuitBindingSource)).BeginInit();
             this.ZGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ZGridView)).BeginInit();
             this.SuspendLayout();
@@ -87,7 +83,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(584, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.Visible = false;
             // 
             // FileDropDown
             // 
@@ -221,7 +216,6 @@
             this.CircuitsGroup.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CircuitBindingSource)).EndInit();
             this.ZGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ZGridView)).EndInit();
             this.ResumeLayout(false);
@@ -244,9 +238,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button DrawButton;
-        private System.Windows.Forms.BindingSource CircuitBindingSource;
         private System.Windows.Forms.GroupBox ZGroupBox;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ZColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FreqColumn;
         private System.Windows.Forms.DataGridView ZGridView;

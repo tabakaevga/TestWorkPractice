@@ -7,7 +7,7 @@ namespace View.DrawRelated
     /// <summary>
     ///     Форма отрисовки цепи
     /// </summary>
-    public partial class DrawCircuit : Form
+    public partial class GraphicCircuitViewForm : Form
     {
         #region Constructs
 
@@ -15,13 +15,13 @@ namespace View.DrawRelated
         ///     Конструктор для отрисовки цепи
         /// </summary>
         /// <param name="circuit">Отрисовываемая цепь</param>
-        public DrawCircuit(IComponent circuit)
+        public GraphicCircuitViewForm(IComponent circuit)
         {
             InitializeComponent();
-            Image image = circuit.GetImage();
-            picture.Width = image.Width;
-            picture.Height = image.Height;
-            picture.Image = image;
+            Image circitImage = circuit.GetImage();
+            picture.Width = circitImage.Width;
+            picture.Height = circitImage.Height;
+            picture.Image = circitImage;
         }
 
         #endregion

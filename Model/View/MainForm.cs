@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -9,6 +11,8 @@ using View.CircuitForms;
 using View.DrawRelated;
 using View.Tools;
 using IComponent = Model.IComponent;
+
+#endregion
 
 namespace View
 {
@@ -24,8 +28,10 @@ namespace View
         /// </summary>
         public MainForm()
         {
-            _circuitList = new List<IComponent>();
+            _circuitList = TestCircuits.TestCircuitsList();
+            //_circuitList = new List<IComponent>();
             InitializeComponent();
+            RefillList();
         }
 
         #endregion
@@ -40,6 +46,18 @@ namespace View
             CircuitsList.Items.Clear();
             foreach (var component in _circuitList)
                 CircuitsList.Items.Add(component.Name);
+            ZGridView.Rows.Clear();
+            if (CircuitsList.SelectedIndex >= 0)
+                foreach (var frequency in _frequencies)
+                {
+                    var z = _circuitList[CircuitsList.SelectedIndex].CalculateZ(frequency);
+
+                    ZGridView.Rows.Add(
+                        Convert.ToString(Math.Round(z.Real, 4), CultureInfo.CurrentCulture) + " + i"
+                        + Convert.ToString(Math.Round(z.Imaginary, 4), CultureInfo.CurrentCulture),
+                        Convert.ToString(frequency, CultureInfo.CurrentCulture));
+                }
+
         }
 
         #endregion
@@ -51,7 +69,9 @@ namespace View
         /// </summary>
         private List<IComponent> _circuitList;
 
-        ///TODO: комментарии
+        /// <summary>
+        ///     Список частот
+        /// </summary>
         private readonly List<double> _frequencies = new List<double>
         {
             50,
@@ -72,10 +92,9 @@ namespace View
         /// <param name="e"></param>
         private void DrawButton_Click(object sender, EventArgs e)
         {
-            var draw = new DrawCircuit(_circuitList[CircuitsList.SelectedIndex]);
+            var draw = new GraphicCircuitViewForm(_circuitList[CircuitsList.SelectedIndex]);
             draw.ShowDialog();
         }
-
 
         /// <summary>
         ///     Обработчик события нажатия на кнопку расчета
@@ -108,11 +127,7 @@ namespace View
             {
                 var circuit = _circuitList[CircuitsList.SelectedIndex] as ICircuit;
                 circuit.CircuitChanged += CalcButton_Click;
-            }
-            if (_circuitList[CircuitsList.SelectedIndex] is IElement)
-            {
-                var circuit = _circuitList[CircuitsList.SelectedIndex] as IElement;
-                circuit.ValueChanged += CalcButton_Click;
+                
             }
         }
 
@@ -154,6 +169,7 @@ namespace View
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             Serializer.DeserializeBinary(openFileDialog1.FileName, ref _circuitList);
+            RefillList();
         }
 
         /// <summary>
@@ -163,7 +179,7 @@ namespace View
         /// <param name="e"></param>
         private void AddCircuit_Click(object sender, EventArgs e)
         {
-            var f = new SerialCircuitEditor();
+            var f = new SerialCircuitEditorForm();
             f.ShowDialog();
             if (f.CircuitSent != null)
                 _circuitList.Add(f.CircuitSent);
@@ -180,12 +196,21 @@ namespace View
             var index = CircuitsList.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches)
             {
-                var f = new SerialCircuitEditor(_circuitList[index] as SerialCircuit);
+                var f = new SerialCircuitEditorForm(_circuitList[index] as SerialCircuit);
+                var l = new List<IComponent>();
+                foreach (var circuit in _circuitList)
+                {
+                    l.Add(circuit);
+                }
                 f.ShowDialog();
                 if (f.CircuitSent != null)
                 {
                     _circuitList[index] = f.CircuitSent;
                     RefillList();
+                }
+                else
+                {
+                    _circuitList = l;
                 }
             }
         }

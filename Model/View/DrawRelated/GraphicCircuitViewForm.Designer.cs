@@ -1,6 +1,6 @@
 ﻿namespace View.DrawRelated
 {
-    partial class DrawCircuit
+    partial class GraphicCircuitViewForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,14 +40,15 @@
             this.picture.TabIndex = 0;
             this.picture.TabStop = false;
             // 
-            // DrawCircuit
+            // GraphicCircuitViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(342, 219);
             this.Controls.Add(this.picture);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "DrawCircuit";
+            this.Name = "GraphicCircuitViewForm";
             this.Text = "Circuit Image";
             ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
             this.ResumeLayout(false);

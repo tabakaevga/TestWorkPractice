@@ -1,18 +1,21 @@
-﻿using System;
+﻿#region Using
+
+using System;
 using System.Windows.Forms;
 using Model;
 using Model.Circuits;
 using Model.Elements;
+using View.ElementRelated;
 
-///TODO: тоже что и в ParallelCircuitEditor
+#endregion
 
 namespace View.CircuitForms
 {
-    //BUG: при нажатии кнопки Cancel возвращается изменененая форма (если изменения были)
+    //BUG: при нажатии кнопки Cancel в CircuitEditor возвращается изменененый список (если изменения были)
     /// <summary>
     ///     Форма последовательного соединения
     /// </summary>
-    public partial class SerialCircuitEditor : Form
+    public partial class SerialCircuitEditorForm : Form
     {
         #region Private variables
 
@@ -28,7 +31,7 @@ namespace View.CircuitForms
         /// <summary>
         ///     Создаваемое соединение
         /// </summary>
-        public IComponent CircuitSent { get; private set; }
+        public SerialCircuit CircuitSent { get; private set; }
 
         #endregion
 
@@ -51,7 +54,7 @@ namespace View.CircuitForms
         /// <summary>
         ///     Конструктор нового соединения
         /// </summary>
-        public SerialCircuitEditor()
+        public SerialCircuitEditorForm()
         {
             InitializeComponent();
             _circuit = new SerialCircuit();
@@ -62,7 +65,7 @@ namespace View.CircuitForms
         ///     Конструктор редактируемого соединения
         /// </summary>
         /// <param name="circuit"> Редактируемогое соединение </param>
-        public SerialCircuitEditor(SerialCircuit circuit)
+        public SerialCircuitEditorForm(SerialCircuit circuit)
         {
             InitializeComponent();
             _circuit = circuit;
@@ -92,7 +95,7 @@ namespace View.CircuitForms
         /// <param name="e"></param>
         private void AddElementButton_Click(object sender, EventArgs e)
         {
-            var f = new ElementEditor();
+            var f = new ElementEditorForm();
             f.ShowDialog();
             if (f.ElementSent != null)
                 _circuit.Add(f.ElementSent);
@@ -105,7 +108,7 @@ namespace View.CircuitForms
         /// <param name="e"></param>
         private void AddSubcircuitButton_Click(object sender, EventArgs e)
         {
-            var f = new ParallelCircuitEditor();
+            var f = new ParallelCircuitEditorForm();
             f.ShowDialog();
             if (f.CircuitSent != null)
                 _circuit.Add(f.CircuitSent);
@@ -132,23 +135,13 @@ namespace View.CircuitForms
             {
                 _circuit.Name = NameTextBox.Text;
                 CircuitSent = _circuit;
+                _circuit.CircuitChanged -= _circuit_OnCircuitChanged;
                 Close();
             }
             else
             {
                 throw new Exception("НЕТ ЭЛЕМЕНТОВ");
             }
-        }
-
-        /// <summary>
-        ///     Обработчик события нажатия на кнопку Отмена
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonCancel_Click(object sender, EventArgs e)
-        {
-            CircuitSent = null;
-            Close();
         }
 
         /// <summary>
@@ -164,7 +157,7 @@ namespace View.CircuitForms
                 if (_circuit[index] is IElement)
                 {
                     var element = _circuit[index] as IElement;
-                    var f = new ElementEditor(element);
+                    var f = new ElementEditorForm(element);
                     f.ShowDialog();
                     if (f.ElementSent != null)
                         _circuit[index] = f.ElementSent;
@@ -172,7 +165,15 @@ namespace View.CircuitForms
                 if (_circuit[index] is ParallelCircuit)
                 {
                     var circuit = _circuit[index] as ParallelCircuit;
-                    var f = new ParallelCircuitEditor(circuit);
+                    var f = new ParallelCircuitEditorForm(circuit);
+                    f.ShowDialog();
+                    if (f.CircuitSent != null)
+                        _circuit[index] = f.CircuitSent;
+                }
+                if (_circuit[index] is SerialCircuit)
+                {
+                    var circuit = _circuit[index] as SerialCircuit;
+                    var f = new SerialCircuitEditorForm(circuit);
                     f.ShowDialog();
                     if (f.CircuitSent != null)
                         _circuit[index] = f.CircuitSent;

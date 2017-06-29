@@ -3,10 +3,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace View.Tools
 {
-    ///TODO: комментарии
+    /// <summary>
+    ///     Класс сериализатор
+    /// </summary>
     internal class Serializer
     {
-        ///TODO: думаю тут тоже надо поставить регион
+        #region Public Methods
+
         /// <summary>
         ///     Сериализатор данных
         /// </summary>
@@ -35,5 +38,7 @@ namespace View.Tools
                 container = (T) formatter.Deserialize(deserializeFile);
             deserializeFile.Close();
         }
+
+        #endregion
     }
 }
