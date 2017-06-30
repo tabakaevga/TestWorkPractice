@@ -96,9 +96,12 @@ namespace Model.Elements
             set
             {
                 Validator.ValidateDouble(value);
-                _value = value;
                 if (Math.Abs(value - _value) > 0.0000000000000000000000000000000001)
+                {
+                    _value = value;
                     ValueChanged?.Invoke(this, new EventArgs());
+                }
+                    
             }
         }
 
