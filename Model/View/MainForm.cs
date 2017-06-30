@@ -123,11 +123,18 @@ namespace View
         /// <param name="e"></param>
         private void CircuitsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_circuitList[CircuitsList.SelectedIndex] is ICircuit)
+            try
             {
-                var circuit = _circuitList[CircuitsList.SelectedIndex] as ICircuit;
-                circuit.CircuitChanged += CalcButton_Click;
-                
+                if (_circuitList[CircuitsList.SelectedIndex] is Circuit)
+                {
+                    var circuit = _circuitList[CircuitsList.SelectedIndex] as Circuit;
+                    circuit.CircuitChanged += CalcButton_Click;
+
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
 

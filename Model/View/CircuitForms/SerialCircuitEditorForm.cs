@@ -98,7 +98,10 @@ namespace View.CircuitForms
             var f = new ElementEditorForm();
             f.ShowDialog();
             if (f.ElementSent != null)
+            {
                 _circuit.Add(f.ElementSent);
+            }
+
         }
 
         /// <summary>
@@ -140,7 +143,8 @@ namespace View.CircuitForms
             }
             else
             {
-                throw new Exception("НЕТ ЭЛЕМЕНТОВ");
+                MessageBox.Show("No elements on list", "Empty list",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

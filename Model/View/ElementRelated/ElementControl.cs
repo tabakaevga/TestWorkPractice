@@ -47,7 +47,7 @@ namespace View.ElementRelated
                         ElementTypeCombo.SelectedIndex = 1;
                     if (value is Resistor)
                         ElementTypeCombo.SelectedIndex = 2;
-                    ValueTextBox.Text = Convert.ToString(element.Value, CultureInfo.CurrentCulture);
+                    ValueTextBox.Text = element.Value.ToString(CultureInfo.CurrentCulture);
                     NameTextBox.Text = element.Name;
                 }
             }

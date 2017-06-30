@@ -73,7 +73,7 @@ namespace View.DrawRelated
         /// <summary>
         ///     Определяет где будет находиться выходная вертикальная линий у параллельной цепи.
         /// </summary>
-        private const int ParallelConnector = 8;
+        private const int ParallelConnector = 10;
 
         #endregion
 
@@ -102,7 +102,7 @@ namespace View.DrawRelated
                         g.DrawImage(elementImage, new Point(x, y - elementImage.Height / ImageDellimitterConst));
                         x += GetSize(component as IElement).Width;
                     }
-                    else if (component is ICircuit)
+                    else if (component is Circuit)
                     {
                         var circuitImage = new Bitmap(EmptyImageSize.Width, EmptyImageSize.Height);
                         if (component is SerialCircuit)
@@ -156,7 +156,7 @@ namespace View.DrawRelated
                             y + elementImage.Height / ImageDellimitterConst - 1);
                         y += elementImage.Height;
                     }
-                    else if (component is ICircuit)
+                    else if (component is Circuit)
                     {
                         var circuitImage = new Bitmap(1, 1);
                         if (component is SerialCircuit)
@@ -195,8 +195,8 @@ namespace View.DrawRelated
         /// <param name="component">Компонент эл. цепи.</param>
         private static Size GetSize(IComponent component)
         {
-            if (component is ICircuit)
-                return GetSize(component as ICircuit);
+            if (component is Circuit)
+                return GetSize(component as Circuit);
             if (component is IElement)
                 return GetSize(component as IElement);
             return new Size(EmptyImageSize.Width, EmptyImageSize.Height);
@@ -215,7 +215,7 @@ namespace View.DrawRelated
         ///     Вычисляет размер рисунка эл. цепи.
         /// </summary>
         /// <param name="circuit">Эл. цепь.</param>
-        private static Size GetSize(ICircuit circuit)
+        private static Size GetSize(Circuit circuit)
         {
             if (circuit is SerialCircuit)
                 return GetSize(circuit as SerialCircuit);
