@@ -4,39 +4,53 @@ using Model.Tools;
 
 namespace Model.Elements
 {
-    
     /// <summary>
-    /// Класс конденсатор
+    ///     Класс конденсатор
     /// </summary>
+    [Serializable]
     public class Capacitor : IElement
     {
+        #region Events
+
+        /// <summary>
+        ///     События изменения сопротивления
+        /// </summary>
+        public event EventHandler ValueChanged;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Импеданс
+        /// </summary>
+        /// <param name="frequency"> Частота тока </param>
+        public Complex CalculateZ(double frequency)
+        {
+            Validator.ValidateDouble(frequency);
+            return new Complex(0, -1 / (2 * Math.PI * frequency * _value));
+        }
+
+        #endregion
+
         #region private members
 
         /// <summary>
-        /// Переменная сопротивления
+        ///     Переменная сопротивления
         /// </summary>
         private double _value;
 
         /// <summary>
-        /// Переменная имени
+        ///     Переменная имени
         /// </summary>
         private string _name;
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        /// События изменения сопротивления
-        /// </summary>
-        public event EventHandler ValueChanged;
 
         #endregion
 
         #region Constructs
 
         /// <summary>
-        /// Пустой конструктор объекта конденсатора
+        ///     Пустой конструктор объекта конденсатора
         /// </summary>
         public Capacitor() :
             this(1, "Capacitor #1.")
@@ -44,7 +58,7 @@ namespace Model.Elements
         }
 
         /// <summary>
-        /// Конструктор объекта конденсатора
+        ///     Конструктор объекта конденсатора
         /// </summary>
         /// <param name="value"> Значение сопротивления </param>
         /// <param name="name"> Наименование элемента </param>
@@ -61,12 +75,7 @@ namespace Model.Elements
         #region Properties
 
         /// <summary>
-        /// Тип элемента
-        /// </summary>
-        public ElementTypes Type => ElementTypes.Capacitor;
-
-        /// <summary>
-        /// Наименование элемента
+        ///     Наименование элемента
         /// </summary>
         public string Name
         {
@@ -79,7 +88,7 @@ namespace Model.Elements
         }
 
         /// <summary>
-        /// Сопротивление
+        ///     Сопротивление
         /// </summary>
         public double Value
         {
@@ -89,28 +98,10 @@ namespace Model.Elements
                 Validator.ValidateDouble(value);
                 _value = value;
                 if (Math.Abs(value - _value) > 0.00000000000000000000000000000000000000000000000000001)
-                {
                     ValueChanged?.Invoke(this, new EventArgs());
-                }
             }
         }
 
         #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// Импеданс
-        /// </summary>
-        /// <param name="frequency"> Частота тока </param>
-        public Complex CalculateZ(double frequency)
-        {
-            Validator.ValidateDouble(frequency);
-            return new Complex(0, -1 / (Math.PI * frequency * _value));
-        }
-
-        #endregion
-
-
     }
 }

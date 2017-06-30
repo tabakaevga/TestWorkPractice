@@ -3,17 +3,17 @@
 namespace Model
 {
     /// <summary>
-    /// Интерфейс любых компонентов цепи
+    ///     Интерфейс любых компонентов цепи
     /// </summary>
-    interface IComponent
+    public interface IComponent
     {
         /// <summary>
-        /// Наименование компонента
+        ///     Наименование компонента
         /// </summary>
         string Name { get; set; }
 
         /// <summary>
-        /// Подсчет комплексного сопротивления компонента
+        ///     Подсчет комплексного сопротивления компонента
         /// </summary>
         /// <param name="value"> Входящее значение (например, частота тока) </param>
         Complex CalculateZ(double value);
