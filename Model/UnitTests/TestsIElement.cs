@@ -23,22 +23,22 @@ namespace UnitTests
         /// <param name="elementIndex"> Индекс тестируемого элемента </param>
         /// <param name="frequency"> Частота сигнала </param>
         [Test]
-        [TestCase(0, 50, TestName = "Индуктор. Корректное значение Value")]
-        [TestCase(1, 50, TestName = "Конденсатор. Корректное значение Value")]
-        [TestCase(2, 50, TestName = "Резистор. Корректное значение Value")]
-        [TestCase(0, 0, TestName = "Индуктор. Некорректное значение Value (0)",
+        [TestCase(0, 50, TestName = "Индуктор. Корректное значение frequency")]
+        [TestCase(1, 50, TestName = "Конденсатор. Корректное значение frequency")]
+        [TestCase(2, 50, TestName = "Резистор. Корректное значение frequency")]
+        [TestCase(0, 0, TestName = "Индуктор. Некорректное значение frequency (0)",
             ExpectedException = typeof(ArgumentOutOfRangeException))]
-        [TestCase(1, 0, TestName = "Конденсатор. Некорректное значение Value (0)",
+        [TestCase(1, 0, TestName = "Конденсатор. Некорректное значение frequency (0)",
             ExpectedException = typeof(ArgumentOutOfRangeException))]
-        [TestCase(1, 0, TestName = "Резистор. Некорректное значение Value (0)",
+        [TestCase(1, 0, TestName = "Резистор. Некорректное значение frequency (0)",
             ExpectedException = typeof(ArgumentOutOfRangeException))]
-        [TestCase(0, -50, TestName = "Индуктор. Некорректное значение Value (<0)",
+        [TestCase(0, -50, TestName = "Индуктор. Некорректное значение frequency (<0)",
             ExpectedException = typeof(ArgumentOutOfRangeException))]
-        [TestCase(1, -50, TestName = "Конденсатор. Некорректное значение Value (<0)",
+        [TestCase(1, -50, TestName = "Конденсатор. Некорректное значение frequency (<0)",
             ExpectedException = typeof(ArgumentOutOfRangeException))]
-        [TestCase(2, -50, TestName = "Резистор. Некорректное значение Value (<0)",
+        [TestCase(2, -50, TestName = "Резистор. Некорректное значение frequency (<0)",
             ExpectedException = typeof(ArgumentOutOfRangeException))]
-        public void CalculateZ(int elementIndex, double frequency)
+        public void IElement_CalculateZ_Test(int elementIndex, double frequency)
         {
             switch (elementIndex)
             {

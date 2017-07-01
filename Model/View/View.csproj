@@ -50,40 +50,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CircuitForms\ParallelCircuitEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="CircuitForms\ParallelCircuitEditorForm.cs" />
     <Compile Include="CircuitForms\ParallelCircuitEditorForm.Designer.cs">
       <DependentUpon>ParallelCircuitEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CircuitForms\SerialCircuitEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="CircuitForms\SerialCircuitEditorForm.cs" />
     <Compile Include="CircuitForms\SerialCircuitEditorForm.Designer.cs">
       <DependentUpon>SerialCircuitEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ElementRelated\ElementControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="ElementRelated\ElementControl.cs" />
     <Compile Include="ElementRelated\ElementControl.Designer.cs">
       <DependentUpon>ElementControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ElementRelated\ElementEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="ElementRelated\ElementEditorForm.cs" />
     <Compile Include="ElementRelated\ElementEditorForm.Designer.cs">
       <DependentUpon>ElementEditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawRelated\GraphicCircuitViewForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="DrawRelated\GraphicCircuitViewForm.cs" />
     <Compile Include="DrawRelated\GraphicCircuitViewForm.Designer.cs">
       <DependentUpon>GraphicCircuitViewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DrawRelated\CircuitImageDrawer.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>

@@ -1,10 +1,8 @@
 ﻿#region Using
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Model.Elements;
 using Model.Tools;
 
 #endregion
@@ -35,7 +33,5 @@ namespace Model.Circuits
         }
 
         #endregion
-
-       
     }
 }

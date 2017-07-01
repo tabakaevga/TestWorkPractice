@@ -12,7 +12,6 @@ namespace Model.Circuits
     /// </summary>
     public abstract class Circuit : IComponent
     {
-
         #region Events
 
         /// <summary>
@@ -82,16 +81,12 @@ namespace Model.Circuits
 
         #region Public Methods
 
-
-
         /// <summary>
         ///     Импеданс
         /// </summary>
         /// <param name="frequency"> Частота </param>
-        public virtual Complex CalculateZ(double frequency)
-        {
-            return new Complex(0,0);
-        }
+        public abstract Complex CalculateZ(double frequency);
+
 
         /// <summary>
         ///     Добавление компонента
@@ -116,8 +111,8 @@ namespace Model.Circuits
         {
             if (!Circuits.Any())
                 throw new ArgumentException("Can't remove from empty list.");
-            if (Circuits.FirstOrDefault(c => c.Name == component.Name) == null)
-                throw new ArgumentException("Component with this name doesn't exist.");
+            if (!Circuits.Contains(component))
+                throw new ArgumentException("Component doesn't exist.");
             Circuits.Remove(component);
             OnCircuitChanged(this, new EventArgs());
             UnsubscribeFrom(component);
@@ -137,8 +132,8 @@ namespace Model.Circuits
             index--;
             var component = Circuits[index];
             Circuits.RemoveAt(index);
-            OnCircuitChanged(this, new EventArgs());
             UnsubscribeFrom(component);
+            OnCircuitChanged(this, new EventArgs());
         }
 
         /// <summary>
@@ -206,7 +201,14 @@ namespace Model.Circuits
         /// <returns></returns>
         private IComponent FindComponent(string name)
         {
-            return Circuits.FirstOrDefault(c => c.Name == name);
+            foreach (var component in  Circuits)
+            {
+                if (component.Name == name)
+                {
+                    return component;
+                }
+            }
+            return null;
         }
 
         /// <summary>
