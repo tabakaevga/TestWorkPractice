@@ -101,7 +101,6 @@ namespace Model.Elements
                     _value = value;
                     ValueChanged?.Invoke(this, new EventArgs());
                 }
-                    
             }
         }
 
