@@ -2,7 +2,6 @@
 
 using System;
 using System.Windows.Forms;
-using Model;
 using Model.Circuits;
 using Model.Elements;
 using View.ElementRelated;
@@ -98,10 +97,7 @@ namespace View.CircuitForms
             var f = new ElementEditorForm();
             f.ShowDialog();
             if (f.ElementSent != null)
-            {
                 _circuit.Add(f.ElementSent);
-            }
-
         }
 
         /// <summary>

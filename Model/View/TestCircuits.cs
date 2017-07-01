@@ -7,24 +7,23 @@ using Model.Elements;
 
 #endregion
 
-
 namespace View
 {
     /// <summary>
-    /// Класс с тестовыми схемами
+    ///     Класс с тестовыми схемами
     /// </summary>
     public static class TestCircuits
     {
         #region  Public methods 
 
         /// <summary>
-        /// Метод, возвращающий список с тестовыми схемами.
+        ///     Метод, возвращающий список с тестовыми схемами.
         /// </summary>
         /// <returns></returns>
         public static List<IComponent> TestCircuitsList()
         {
             var testCircuitsList = new List<IComponent>
-                { _circuit1(), _circuit2(), _circuit3(), _circuit4(), _circuit5()};
+                {_circuit1(), _circuit2(), _circuit3(), _circuit4(), _circuit5()};
             return testCircuitsList;
         }
 
@@ -33,12 +32,12 @@ namespace View
         #region - Private methods | Test circuits-
 
         /// <summary>
-        /// Тестовая схема №1.
+        ///     Тестовая схема №1.
         /// </summary>
         /// <returns></returns>
         public static IComponent _circuit1()
         {
-            var R1 = new Resistor( 100,"R1");
+            var R1 = new Resistor(100, "R1");
             var C1 = new Capacitor(0.005, "C1");
             var L1 = new Inductor(0.5, "L1");
             var circuit1 = new SerialCircuit();
@@ -53,7 +52,7 @@ namespace View
         }
 
         /// <summary>
-        /// Тестовая схема №2.
+        ///     Тестовая схема №2.
         /// </summary>
         /// <returns></returns
         public static IComponent _circuit2()
@@ -73,7 +72,7 @@ namespace View
         }
 
         /// <summary>
-        /// Тестовая схема №3.
+        ///     Тестовая схема №3.
         /// </summary>
         /// <returns></returns
         public static IComponent _circuit3()
@@ -103,9 +102,9 @@ namespace View
             var L1 = new Inductor(0.5, "L1");
             var L2 = new Inductor(0.5, "L2");
             var L3 = new Inductor(0.5, "L3");
-            var circuit1 = new SerialCircuit { Name = "circuit14" };
-            var circuit2 = new ParallelCircuit { Name = "circuit2" };
-            var circuit3 = new ParallelCircuit { Name = "circuit3" };
+            var circuit1 = new SerialCircuit {Name = "circuit14"};
+            var circuit2 = new ParallelCircuit {Name = "circuit2"};
+            var circuit3 = new ParallelCircuit {Name = "circuit3"};
             circuit3.Add(L1);
             circuit3.Add(R1);
             circuit2.Add(C1);
@@ -126,10 +125,10 @@ namespace View
             var L1 = new Inductor(0.5, "L1");
             var L2 = new Inductor(0.5, "L2");
             var L3 = new Inductor(0.5, "L3");
-            var circuit1 = new SerialCircuit { Name = "circuit15" };
-            var circuit2 = new ParallelCircuit { Name = "circuit2" };
-            var circuit3 = new SerialCircuit() { Name = "circuit3" };
-            var circuit4 = new ParallelCircuit { Name = "circuit4" };
+            var circuit1 = new SerialCircuit {Name = "circuit15"};
+            var circuit2 = new ParallelCircuit {Name = "circuit2"};
+            var circuit3 = new SerialCircuit {Name = "circuit3"};
+            var circuit4 = new ParallelCircuit {Name = "circuit4"};
             circuit4.Add(L1);
             circuit4.Add(R1);
             circuit3.Add(C1);
@@ -142,7 +141,7 @@ namespace View
             circuit1.Add(L3);
             circuit1.Add(circuit3);
             circuit1.Add(circuit2);
-            
+
             return circuit1;
         }
 

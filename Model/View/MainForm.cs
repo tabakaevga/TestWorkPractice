@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 using Model.Circuits;
-using Model.Elements;
 using View.CircuitForms;
 using View.DrawRelated;
 using View.Tools;
@@ -57,7 +56,6 @@ namespace View
                         + Convert.ToString(Math.Round(z.Imaginary, 4), CultureInfo.CurrentCulture),
                         Convert.ToString(frequency, CultureInfo.CurrentCulture));
                 }
-
         }
 
         #endregion
@@ -129,7 +127,6 @@ namespace View
                 {
                     var circuit = _circuitList[CircuitsList.SelectedIndex] as Circuit;
                     circuit.CircuitChanged += CalcButton_Click;
-
                 }
             }
             catch (Exception)
@@ -206,9 +203,7 @@ namespace View
                 var f = new SerialCircuitEditorForm(_circuitList[index] as SerialCircuit);
                 var l = new List<IComponent>();
                 foreach (var circuit in _circuitList)
-                {
                     l.Add(circuit);
-                }
                 f.ShowDialog();
                 if (f.CircuitSent != null)
                 {

@@ -2,7 +2,6 @@
 
 using System;
 using System.Windows.Forms;
-using Model;
 using Model.Circuits;
 using Model.Elements;
 using View.ElementRelated;
@@ -147,7 +146,6 @@ namespace View.CircuitForms
         /// <param name="e"></param>
         private void ComponentsListBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            
             var index = ComponentsListBox.IndexFromPoint(e.Location);
             if (index != ListBox.NoMatches)
             {
